@@ -10,10 +10,19 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Spacer()
+            
+            Text("Konver\nsácio")
+                .font(Font.largeTitle)
+                .fontWeight(Font.Weight.bold)
+            
+            Spacer()
+            
+            MainButtonView(title: "Iniciar")
+            MainButtonView(title: "Galeria")
+            MainButtonView(title: "Tutorial")
+            
+            Spacer(minLength: 100)
         }
         .padding()
     }
