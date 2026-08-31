@@ -14,7 +14,7 @@
 		EE41AEC23045A7E00097A77A /* Exceptions for "FirstTable" folder in "FirstTable" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Resources/Info.plist,
+				Info.plist,
 			);
 			target = EE0E138530405C1B008B1EC4 /* FirstTable */;
 		};
