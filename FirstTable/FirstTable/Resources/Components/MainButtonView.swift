@@ -13,8 +13,8 @@ struct MainButtonView: View {
     var body: some View {
         VStack {
             Text("\(title)")
-                .font(.custom("Poppins-semibold", size: 18))
-                .fontWeight(.semibold)
+                .font(.custom("Poppins-SemiBold", size: 18))
+                .foregroundStyle(.black)
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: 56)
