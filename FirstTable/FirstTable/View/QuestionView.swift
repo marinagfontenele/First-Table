@@ -18,79 +18,76 @@ struct QuestionView: View {
     @State private var question: String = "Se voce dormisse e acordasse com o dobro da sua idade, o que iria fazer?"
     
     var body: some View {
-        NavigationStack{
-            VStack {
-                HStack {
-                    ZStack(alignment: .topLeading){
-                        RoundedRectangle(cornerRadius: 50)
-                            .frame(width: 300, height: 5)
-                            .foregroundStyle(Color.secondary)
-                        
-                        RoundedRectangle(cornerRadius: 50)
-                            .frame(
-                                width: 300*CGFloat(currentQuestion)/CGFloat(totalQuestion),
-                                height: 5
-                            )
-                            .foregroundStyle(Color.lemonGreen)
-                    }
+        VStack {
+            HStack {
+                ZStack(alignment: .topLeading){
+                    RoundedRectangle(cornerRadius: 50)
+                        .frame(width: 300, height: 5)
+                        .foregroundStyle(Color.secondary)
                     
-                    Spacer()
-                    
-                    Text("\(currentQuestion)/\(totalQuestion)")
+                    RoundedRectangle(cornerRadius: 50)
+                        .frame(
+                            width: 300*CGFloat(currentQuestion)/CGFloat(totalQuestion),
+                            height: 5
+                        )
+                        .foregroundStyle(Color.lemonGreen)
                 }
-                .padding()
-                .padding(.horizontal,10)
                 
                 Spacer()
-                 
-                Text(question)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 40)
-                    .padding(.top,50)
-                    .font(.custom("Poppins-SemiBold", size: 23))
-                    .frame(minWidth:296, minHeight: 223 + 50)
-                    .background(
-                        SpeechBubble()
-                            .fill(.darkPurple)
-                    )
-                    .padding()
-                    .overlay(alignment: .bottomTrailing){
-                        Image("shoutingBalloon")
-                            .offset(y: 20)
-                    }
-                    .padding(.bottom, 70)
                 
-                 Spacer()
-                
-                Button {
-                    goForward()
-                } label: {
-                    ImgButton(imageName: "arrow.right").padding(.horizontal, 140).padding(10)
-                }
+                Text("\(currentQuestion)/\(totalQuestion)")
             }
-            .navigationTitle("Perguntas")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar{
-                ToolbarItem(placement: .cancellationAction) {
-                    Button {
-                        showAlert.toggle()
-                    } label: {
-                        Image(systemName: "xmark")
-                    }
-
-                }
-            }
-            .alert("Tem certeza que deseja sair?", isPresented: $showAlert) {
-                
-                Button("Cancelar", role: .cancel) {}
-                Button("Sair", role: .destructive) {
-                    dismiss()
-                }
-                      
-            } message: {
-            Text("As alterações feitas serão perdidas.")
-            }
+            .padding()
+            .padding(.horizontal,10)
             
+            Spacer()
+             
+            Text(question)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
+                .padding(.top,50)
+                .font(.custom("Poppins-SemiBold", size: 23))
+                .frame(minWidth:296, minHeight: 223 + 50)
+                .background(
+                    SpeechBubble()
+                        .fill(.darkPurple)
+                )
+                .padding()
+                .overlay(alignment: .bottomTrailing){
+                    Image("shoutingBalloon")
+                        .offset(y: 20)
+                }
+                .padding(.bottom, 70)
+            
+             Spacer()
+            
+            Button {
+                goForward()
+            } label: {
+                ImgButton(imageName: "arrow.right").padding(.horizontal, 140).padding(10)
+            }
+        }
+        .navigationTitle("Perguntas")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar{
+            ToolbarItem(placement: .cancellationAction) {
+                Button {
+                    showAlert.toggle()
+                } label: {
+                    Image(systemName: "xmark")
+                }
+
+            }
+        }
+        .alert("Tem certeza que deseja sair?", isPresented: $showAlert) {
+            
+            Button("Cancelar", role: .cancel) {}
+            Button("Sair", role: .destructive) {
+                dismiss()
+            }
+                  
+        } message: {
+        Text("As alterações feitas serão perdidas.")
         }
     }
     

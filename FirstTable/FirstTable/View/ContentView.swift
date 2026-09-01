@@ -9,22 +9,29 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Spacer()
-            
-            Text("Konver\nsácio")
-                .font(Font.largeTitle)
-                .fontWeight(Font.Weight.bold)
-            
-            Spacer()
-            
-            MainButtonView(title: "Iniciar")
-            MainButtonView(title: "Galeria")
-            MainButtonView(title: "Tutorial")
-            
-            Spacer(minLength: 100)
+        NavigationStack{
+            VStack {
+                Spacer()
+                
+                Text("Konver\nsácio")
+                    .font(Font.largeTitle)
+                    .fontWeight(Font.Weight.bold)
+                
+                Spacer()
+                
+                NavigationLink{
+                    CameraView()
+                } label: {
+                    MainButtonView(title: "Iniciar")
+                }
+                
+                MainButtonView(title: "Galeria")
+                MainButtonView(title: "Tutorial")
+                
+                Spacer(minLength: 100)
+            }
+            .padding()
         }
-        .padding()
     }
 }
 
