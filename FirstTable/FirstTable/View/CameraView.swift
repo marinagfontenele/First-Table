@@ -23,12 +23,18 @@ struct CameraView: View {
             Button {
                 captureImage()
             } label: {
-                Circle()
-                    .fill(.gray.exposureAdjust(5))
-                    .frame(width: 90, height: 90)
-                    .overlay(Circle().fill(.white).frame(width: 75, height: 75))
-                    .padding(50)
+                ZStack {
+                    Circle()
+                        .fill(.gray.opacity(0.5))
+                        .frame(width: 90, height: 90)
+
+                    Circle()
+                        .fill(.white)
+                        .frame(width: 75, height: 75)
+                }
+                .padding(50)
             }
+            
         }
         .navigationTitle("Desafio")
         .navigationBarTitleDisplayMode(.inline)
