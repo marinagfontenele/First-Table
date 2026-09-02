@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct MainButtonView: View {
-    @State var title: String = "Hello, world!"
+    @State var title: String = "Título"
     
     var body: some View {
         VStack {
             Text("\(title)")
-                .font(.custom("Poppins-semibold", size: 18))
-                .fontWeight(.semibold)
+                .font(.custom("Poppins-SemiBold", size: 24))
+              // .fontWeight(.semibold)
+                .foregroundStyle(.black)
         }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: 56)
+        .frame(maxWidth: .infinity, minHeight: 56)
         .background(.lemonGreen)
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }
