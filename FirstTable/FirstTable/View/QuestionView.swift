@@ -20,7 +20,8 @@ struct QuestionView: View {
     var body: some View {
         VStack {
             HStack {
-                ZStack(alignment: .topLeading){
+                ZStack(alignment: .center){
+                    
                     RoundedRectangle(cornerRadius: 50)
                         .frame(width: 300, height: 5)
                         .foregroundStyle(Color.secondary)
@@ -33,6 +34,8 @@ struct QuestionView: View {
                         .foregroundStyle(Color.lemonGreen)
                 }
                 
+                
+                
                 Spacer()
                 
                 Text("\(currentQuestion)/\(totalQuestion)")
@@ -41,32 +44,40 @@ struct QuestionView: View {
             .padding(.horizontal,10)
             
             Spacer()
-             
-            Text(question)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 40)
-                .padding(.top,50)
-                .font(.custom("Poppins-SemiBold", size: 23))
-                .frame(minWidth:296, minHeight: 223 + 50)
-                .background(
-                    SpeechBubble()
-                        .fill(.darkPurple)
-                )
-                .padding()
-                .overlay(alignment: .bottomTrailing){
-                    Image("shoutingBalloon")
-                        .offset(y: 20)
-                }
-                .padding(.bottom, 70)
             
-             Spacer()
-            
-            Button {
-                goForward()
-            } label: {
-                ImgButton(imageName: "arrow.right").padding(.horizontal, 140).padding(10)
+            ZStack{
+                
+                OllieView(x: 0.20, y: 0.22, yEyes: 0.02)
+                .scaleEffect(0.6)
+                
+                
+                Text(question)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+                    .padding(.top,50)
+                    .font(.custom("Poppins-SemiBold", size: 23))
+                    .frame(minWidth:296, minHeight: 223 + 50)
+                    .background(
+                        SpeechBubble()
+                            .fill(.darkPurple)
+                    )
+                    .padding()
+                    .overlay(alignment: .bottomTrailing){
+                        Image("shoutingBalloon")
+                            .offset(y: 20)
+                    }
+                    .padding(.bottom, 70)
             }
-        }
+                
+                Spacer()
+                
+                Button {
+                    goForward()
+                } label: {
+                    ImgButton(imageName: "arrow.right").padding(.horizontal, 140).padding(10)
+                }
+            }
+        
         .navigationTitle("Perguntas")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
