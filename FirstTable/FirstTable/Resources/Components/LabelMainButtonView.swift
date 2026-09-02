@@ -13,12 +13,7 @@ struct MainButtonView: View {
     var body: some View {
         VStack {
             Text("\(title)")
-<<<<<<< HEAD:FirstTable/FirstTable/Resources/Components/MainButtonView.swift
-                .font(.custom("Poppins-SemiBold", size: 18))
-=======
                 .font(.custom("Poppins-SemiBold", size: 24))
-              // .fontWeight(.semibold)
->>>>>>> develop:FirstTable/FirstTable/Resources/Components/LabelMainButtonView.swift
                 .foregroundStyle(.black)
         }
         .frame(maxWidth: .infinity, minHeight: 56)
