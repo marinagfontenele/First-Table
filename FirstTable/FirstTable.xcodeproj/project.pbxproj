@@ -15,6 +15,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				"Poppins-Regular.ttf",
 			);
 			target = EE0E138530405C1B008B1EC4 /* FirstTable */;
 		};
