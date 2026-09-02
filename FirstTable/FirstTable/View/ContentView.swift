@@ -8,27 +8,42 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isPresented: Bool = false
+    
     var body: some View {
-        NavigationStack{
+        ScrollView {
             VStack {
-                Spacer()
+                Spacer(minLength: 150)
                 
                 Text("Konver\nsácio")
-                    .font(Font.largeTitle)
-                    .fontWeight(Font.Weight.bold)
+                    .font(Font.custom("Poppins-SemiBold", size: 60, relativeTo: .title))
                 
-                Spacer()
+                Spacer(minLength: 150)
                 
-                NavigationLink{
-                    CameraView()
+                Button {
+                    InformationsView()
                 } label: {
                     MainButtonView(title: "Iniciar")
                 }
+                .padding(.horizontal, 40)
                 
-                MainButtonView(title: "Galeria")
-                MainButtonView(title: "Tutorial")
+                Button {
+                    
+                } label: {
+                    MainButtonView(title: "Galeria")
+                }
+                .padding(.horizontal, 40)
+                .padding(.vertical, 8)
                 
-                Spacer(minLength: 100)
+                
+                Button {
+                    
+                } label: {
+                    MainButtonView(title: "Tutorial")
+                }
+                .padding(.horizontal, 40)
+                
+                Spacer()
             }
             .padding()
         }
