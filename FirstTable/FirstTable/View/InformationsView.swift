@@ -20,7 +20,7 @@ struct InformationsView: View {
                             .font(Font.custom("Poppins-SemiBold", size: 20))
                             .padding(.horizontal, 20)
                         
-                        TextField("Digite o nome do grupo", text: $name)
+                        TextField("Ex: Os Besties", text: $name)
                             .font(Font.custom("Poppins-SemiBold", size: 15))
                             .foregroundStyle(.white)
                             .padding(15)
@@ -53,8 +53,8 @@ struct InformationsView: View {
                         .padding(.bottom, 40)
                         .padding(.vertical, 8)
                         
-                        Button {
-                            
+                        NavigationLink {
+                            DescriptionView()
                         } label: {
                             MainButtonView(title: "Continuar")
                         }
