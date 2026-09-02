@@ -14,7 +14,6 @@ struct MainButtonView: View {
         VStack {
             Text("\(title)")
                 .font(.custom("Poppins-SemiBold", size: 24))
-              // .fontWeight(.semibold)
                 .foregroundStyle(.black)
         }
         .frame(maxWidth: .infinity, minHeight: 56)
