@@ -3,6 +3,7 @@
 //  FirstTable
 //
 //  Created by Marina Gomes Fontenele on 31/08/26.
+
 //
 
 import Foundation
@@ -60,5 +61,6 @@ enum Category: String, CaseIterable, Codable {
         case .gossip: return "Crie perguntas relacionadas a fofocas. As perguntas devem fazer os usuários relembrarem fofocas pessoasi ou de famosos"
         case .situations: return "Crie perguntas relacionadas a situações aleatórias em cenários imaginários. Faça os usuários relembrarem de situações que aconteceram com eles e faça eles se questionarem sobre o que fariam caso estivessem em uma situação fictícia."
         }
+
     }
 }
