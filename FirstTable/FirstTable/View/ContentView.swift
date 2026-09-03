@@ -27,18 +27,19 @@ struct ContentView: View {
                         MainButtonView(title: "Iniciar")
                     }
                     .padding(.horizontal, 40)
+                    .padding(.vertical, 15)
                     
-                    Button {
-                        
-                    } label: {
-                        MainButtonView(title: "Galeria")
-                    }
-                    .padding(.horizontal, 40)
-                    .padding(.vertical, 8)
+//                    Button {
+//                        
+//                    } label: {
+//                        MainButtonView(title: "Galeria")
+//                    }
+//                    .padding(.horizontal, 40)
+//                    .padding(.vertical, 8)
                     
                     
-                    Button {
-                        
+                    NavigationLink {
+                        TutorialView()
                     } label: {
                         MainButtonView(title: "Tutorial")
                     }
@@ -48,7 +49,7 @@ struct ContentView: View {
                 }
                 .padding()
             }
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 
