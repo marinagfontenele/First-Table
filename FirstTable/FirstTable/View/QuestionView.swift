@@ -20,7 +20,7 @@ struct QuestionView: View {
     var body: some View {
         VStack {
             HStack {
-                ZStack(alignment: .center){
+                ZStack(alignment: .leading){
                     
                     RoundedRectangle(cornerRadius: 50)
                         .frame(width: 300, height: 5)
