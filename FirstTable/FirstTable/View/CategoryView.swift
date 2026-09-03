@@ -12,7 +12,7 @@ struct CategoryView: View {
     @State var selected: Category? = nil
     
     var body: some View {
-        NavigationStack {
+     
             ScrollView {
                 HStack {
                     VStack(alignment: .leading) {
@@ -67,7 +67,7 @@ struct CategoryView: View {
                     }
                 }
             }
-        }
+            .background(Color.bgBlack.ignoresSafeArea())
         .navigationTitle("Informações")
     }
 }
