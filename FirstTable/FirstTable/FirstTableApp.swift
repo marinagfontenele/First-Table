@@ -13,7 +13,11 @@ struct FirstTableApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if isFirstLaunch {
+                OnboardingView()
+            } else {
+                ContentView()
+            }
         }
     }
 }
