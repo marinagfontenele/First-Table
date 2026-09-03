@@ -15,7 +15,9 @@ struct CategoryButtonView: View {
         ZStack {
             if (selectedCategory == category) {
                 Button {
-                    selectedCategory = nil
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        selectedCategory = nil
+                    }
                 } label: {
                     VStack {
                         ZStack {
@@ -46,7 +48,9 @@ struct CategoryButtonView: View {
                 )
             } else {
                 Button {
-                    selectedCategory = category
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        selectedCategory = category
+                    }
                 } label: {
                     VStack {
                         ZStack {

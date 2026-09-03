@@ -36,7 +36,10 @@ struct ChallengeView: View {
                 .padding(.horizontal, 38)
                 .background(Color(.lemonGreen).cornerRadius(20))
         }
+        .navigationTitle("Desafio")
         .padding(.horizontal, 40)
+        .background(Color.bgBlack.ignoresSafeArea())
+
     }
 }
 
