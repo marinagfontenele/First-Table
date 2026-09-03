@@ -13,31 +13,42 @@ struct CameraView: View {
     
     @State private var cameraService = CameraService()
     @State private var capturedImage: UIImage?
+    @State private var showConfirmation: Bool = false
     
     var body: some View {
-        ZStack(alignment: .bottom){
+        VStack /*ZStack(alignment: .bottom)*/{
             CameraPreview(session: cameraService.session)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .padding()
-            
-            Button {
-                captureImage()
-            } label: {
-                ZStack {
-                    Circle()
-                        .fill(.gray.opacity(0.5))
-                        .frame(width: 90, height: 90)
-
-                    Circle()
-                        .fill(.white)
-                        .frame(width: 75, height: 75)
-                }
-                .padding(50)
-            }
             
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .aspectRatio(3.0 / 4.0, contentMode: .fit)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .padding(.horizontal)
+        
+        Button {
+            captureImage()
+        } label: {
+            ZStack {
+                Circle()
+                    .fill(.gray.opacity(0.5))
+                    .frame(width: 90, height: 90)
+
+                Circle()
+                    .fill(.white)
+                    .frame(width: 75, height: 75)
+            }
+            .padding(.top)
+        }
+        
         .navigationTitle("Desafio")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(isPresented: $showConfirmation) {
+            if let capturedImage {
+                PhotoConfirmationView(image: capturedImage) {
+                    //keep the photo
+                }
+            }
+        }
         .toolbar{
             ToolbarItem(placement: .cancellationAction) {
                 Button {
@@ -70,6 +81,8 @@ struct CameraView: View {
                 let capturedImage2 = try await cameraService.capturePhoto()
                 
                 capturedImage = capturedImage2.uiImage
+                
+                showConfirmation.toggle()
             } catch {
                 print("Erro ao tirar a foto: \(error)")
             }
