@@ -9,6 +9,7 @@ import SwiftUI
 import PhotosUI
 
 struct TutorialView: View {
+    @Environment(\.dismiss) var dismiss
     @State private var currentOption: Onboarding = .introduction
     @State private var selectedIndex: Int = 0
     private let allPages = Onboarding.allCases
@@ -19,7 +20,6 @@ struct TutorialView: View {
                 ForEach(allPages) { option in
                     VStack(alignment: .center) {
                         Image(option.imageName)
-                            .padding(.top, 40)
                         
                         Spacer()
                         
@@ -59,7 +59,7 @@ struct TutorialView: View {
             Spacer()
         } else {
             Button {
-                advancePage()
+                dismiss()
             } label: {
                 MainButtonView(title: "Concluir")
             }
