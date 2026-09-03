@@ -62,6 +62,9 @@ struct InformationsView: View {
                         .padding(.vertical, 8)
                         
                         Spacer()
+                        
+                        OllieView(x: 0.5, y: 20, yEyes: 0.02)
+                            .scaleEffect(2)
                     }
                 }
             }
