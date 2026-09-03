@@ -60,6 +60,9 @@ struct DescriptionView: View {
                     }
                     
                     Spacer()
+                    
+                    OllieView(x: 0.5, y: 16, yEyes: 0.02)
+                        .scaleEffect(2)
                 }
             }
         }
