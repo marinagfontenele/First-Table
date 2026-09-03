@@ -9,7 +9,6 @@ import SwiftUI
 import PhotosUI
 
 struct OnboardingView: View {
-    @Environment(\.dismiss) var dismiss
     @AppStorage("isFirstLaunch") var isFirstLaunch = true
     @State var goToNext: Bool = false
     @State private var currentOption: Onboarding = .introduction

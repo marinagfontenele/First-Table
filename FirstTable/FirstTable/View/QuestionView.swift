@@ -90,6 +90,7 @@ struct QuestionView: View {
 
             }
         }
+        .navigationBarBackButtonHidden(true)
         .alert("Tem certeza que deseja sair?", isPresented: $showAlert) {
             
             Button("Cancelar", role: .cancel) {}
