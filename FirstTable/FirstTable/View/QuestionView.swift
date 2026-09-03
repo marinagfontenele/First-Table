@@ -70,14 +70,16 @@ struct QuestionView: View {
             }
                 
                 Spacer()
-                
-                Button {
-                    goForward()
+            
+            Button {
+                goForward()
                 } label: {
-                    ImgButton(imageName: "arrow.right").padding(.horizontal, 140).padding(10)
-                }
+                    MainButtonView(title: "Continuar")
             }
-        
+                .padding(.horizontal, 40)
+                .padding(.vertical, 25)
+        }
+        .background(Color.bgBlack.ignoresSafeArea())
         .navigationTitle("Perguntas")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
