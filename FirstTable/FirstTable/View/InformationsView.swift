@@ -10,6 +10,7 @@ import SwiftUI
 struct InformationsView: View {
     @State var name: String = ""
     @State var selectedRound: rounds? = nil
+    @State var numberRounds: Int = 0
     @State private var showError = false
     @State private var goToDescription = false
     
@@ -115,7 +116,7 @@ struct InformationsView: View {
                 isNameFieldFocused = false
             }
             .navigationDestination(isPresented: $goToDescription) {
-                DescriptionView()
+                DescriptionView(numberQuestions: numberRounds)
             }
         
         .navigationTitle("Informações")
@@ -146,7 +147,6 @@ struct InformationsView: View {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         selectedRound = nil
                         isNameFieldFocused = false
-
                     }
                 } label: {
                     Text("05")
@@ -170,6 +170,7 @@ struct InformationsView: View {
                         selectedRound = .five
                         isNameFieldFocused = false
                     }
+                    numberRounds = 5
                 } label: {
                     Text("05")
                         .font(Font.custom("Poppins-SemiBold", size: 25))
@@ -182,9 +183,8 @@ struct InformationsView: View {
                         .stroke(Color(.lemonGreen), lineWidth: 2)
                 }
                 .background(
-                    Color(.lemonGreen)
+                    Color(.lemonBackground)
                         .cornerRadius(20)
-                        .opacity(0.12)
                 )
                 .padding(.leading, 20)
             }
@@ -198,7 +198,6 @@ struct InformationsView: View {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         selectedRound = nil
                         isNameFieldFocused = false
-
                     }
                 } label: {
                     Text("10")
@@ -220,8 +219,8 @@ struct InformationsView: View {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         selectedRound = .ten
                         isNameFieldFocused = false
-
                     }
+                    numberRounds = 10
                 } label: {
                     Text("10")
                         .font(Font.custom("Poppins-SemiBold", size: 25))
@@ -248,7 +247,6 @@ struct InformationsView: View {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         selectedRound = nil
                         isNameFieldFocused = false
-
                     }
                 } label: {
                     Text("15")
@@ -271,8 +269,8 @@ struct InformationsView: View {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         selectedRound = .fifteen
                         isNameFieldFocused = false
-
                     }
+                    numberRounds = 15
                 } label: {
                     Text("15")
                         .font(Font.custom("Poppins-SemiBold", size: 25))
