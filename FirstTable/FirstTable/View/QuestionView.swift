@@ -15,6 +15,7 @@ struct QuestionView: View {
     @State private var currentQuestion: Int = 1
     let totalQuestion: Int
     @State private var showChallengeView: Bool = false
+    @State private var showMemoryView: Bool = false
     
     @State private var question: String = "Se voce dormisse e acordasse com o dobro da sua idade, o que iria fazer?"
     
@@ -24,12 +25,12 @@ struct QuestionView: View {
                 ZStack(alignment: .leading){
                     
                     RoundedRectangle(cornerRadius: 50)
-                        .frame(width: 300, height: 5)
+                        .frame(width: 280, height: 5)
                         .foregroundStyle(Color.secondary)
                     
                     RoundedRectangle(cornerRadius: 50)
                         .frame(
-                            width: 300*CGFloat(currentQuestion)/CGFloat(totalQuestion),
+                            width: 280*CGFloat(currentQuestion)/CGFloat(totalQuestion),
                             height: 5
                         )
                         .foregroundStyle(Color.lemonGreen)
@@ -93,10 +94,15 @@ struct QuestionView: View {
             }
         }
         .navigationDestination(isPresented: $showChallengeView) {
-            ChallengeView{
-                currentQuestion += 1
-                showChallengeView.toggle()
-            }
+            ChallengeView(
+                lastQuestion: currentQuestion == totalQuestion,
+                onFinish: {
+                    currentQuestion += 1
+                    showChallengeView = false
+                })
+        }
+        .navigationDestination(isPresented: $showMemoryView){
+            MemoryFivePicturesView()
         }
         .navigationBarBackButtonHidden(true)
         .alert("Tem certeza que deseja sair?", isPresented: $showAlert) {
@@ -114,7 +120,9 @@ struct QuestionView: View {
     func goForward() {
         if currentQuestion % 3 == 0{
             showChallengeView = true
-        } else if currentQuestion < totalQuestion {
+        } else if currentQuestion == totalQuestion {
+            showMemoryView = true
+        } else {
             currentQuestion += 1
         }
     }

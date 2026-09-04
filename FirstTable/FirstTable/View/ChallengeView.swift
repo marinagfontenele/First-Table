@@ -10,7 +10,9 @@ import SwiftUI
 struct ChallengeView: View {
     @State private var isPresented: Bool = false
     @State private var scale = 0.4
+    let lastQuestion: Bool
     let onFinish:  () -> Void
+    
     var body: some View {
         VStack {
             
@@ -43,7 +45,7 @@ struct ChallengeView: View {
             Spacer()
             
             NavigationLink {
-                CameraView(onFinish: onFinish)
+                CameraView(lastQuestion: lastQuestion, onFinish: onFinish)
             } label: {
                 Image(systemName: "camera.fill")
                     .resizable()

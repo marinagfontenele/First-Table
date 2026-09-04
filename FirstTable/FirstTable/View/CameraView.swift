@@ -15,6 +15,8 @@ struct CameraView: View {
     @State private var capturedImage: UIImage?
     @State private var showConfirmation: Bool = false
     
+    let lastQuestion: Bool
+    
     let onFinish: () -> Void
     
     var body: some View {
@@ -47,7 +49,7 @@ struct CameraView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(isPresented: $showConfirmation) {
             if let capturedImage {
-                PhotoConfirmationView(image: capturedImage, onConfirm: {onFinish()})
+                PhotoConfirmationView(image: capturedImage, onConfirm: {onFinish()}, lastQuestion: lastQuestion)
             }
         }
         .toolbar{
