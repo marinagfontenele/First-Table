@@ -10,6 +10,7 @@ import SwiftUI
 struct CategoryView: View {
     @State var name: String = ""
     @State var selected: Category? = nil
+    let totalQuestion: Int
     
     var body: some View {
      
@@ -57,7 +58,7 @@ struct CategoryView: View {
                         .padding(.horizontal, 16)
                         
                         NavigationLink {
-                            QuestionView()
+                            QuestionView(totalQuestion: totalQuestion)
                         } label: {
                             MainButtonView(title: "Continuar")
                         }
@@ -73,6 +74,6 @@ struct CategoryView: View {
     }
 }
 
-#Preview {
-    CategoryView()
-}
+//#Preview {
+//    CategoryView()
+//}

@@ -14,6 +14,8 @@ struct InformationsView: View {
     @State private var showError = false
     @State private var goToDescription = false
     
+    @State private var totalQuestion: Int? = nil
+    
     
     @FocusState private var isNameFieldFocused: Bool
     
@@ -116,7 +118,9 @@ struct InformationsView: View {
                 isNameFieldFocused = false
             }
             .navigationDestination(isPresented: $goToDescription) {
-                DescriptionView(numberQuestions: numberRounds)
+                if let totalQuestion {
+                    DescriptionView(totalQuestion: totalQuestion)
+                }
             }
         
         .navigationTitle("Informações")
@@ -129,7 +133,7 @@ struct InformationsView: View {
         
         let roundIsEmpty = selectedRound == nil
         
-        if nameIsEmpty || roundIsEmpty {
+        if nameIsEmpty || roundIsEmpty || totalQuestion == nil {
             showError = true
             isNameFieldFocused = nameIsEmpty
             
@@ -170,7 +174,7 @@ struct InformationsView: View {
                         selectedRound = .five
                         isNameFieldFocused = false
                     }
-                    numberRounds = 5
+                    totalQuestion = 5
                 } label: {
                     Text("05")
                         .font(Font.custom("Poppins-SemiBold", size: 25))
@@ -198,7 +202,7 @@ struct InformationsView: View {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         selectedRound = nil
                         isNameFieldFocused = false
-                    }
+                   }
                 } label: {
                     Text("10")
                         .font(Font.custom("Poppins-SemiBold", size: 25))
@@ -220,7 +224,7 @@ struct InformationsView: View {
                         selectedRound = .ten
                         isNameFieldFocused = false
                     }
-                    numberRounds = 10
+                    totalQuestion = 10
                 } label: {
                     Text("10")
                         .font(Font.custom("Poppins-SemiBold", size: 25))
@@ -270,7 +274,7 @@ struct InformationsView: View {
                         selectedRound = .fifteen
                         isNameFieldFocused = false
                     }
-                    numberRounds = 15
+                    totalQuestion = 15
                 } label: {
                     Text("15")
                         .font(Font.custom("Poppins-SemiBold", size: 25))
@@ -294,6 +298,6 @@ struct InformationsView: View {
     
 }
 
-#Preview {
-    InformationsView()
-}
+//#Preview {
+//    InformationsView()
+//}

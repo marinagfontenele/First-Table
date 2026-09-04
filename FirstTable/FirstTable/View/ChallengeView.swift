@@ -10,6 +10,9 @@ import SwiftUI
 struct ChallengeView: View {
     @State private var isPresented: Bool = false
     @State private var scale = 0.4
+    let lastQuestion: Bool
+    let onFinish:  () -> Void
+    
     var body: some View {
         VStack {
             
@@ -41,14 +44,18 @@ struct ChallengeView: View {
             
             Spacer()
             
-            Image(systemName: "camera.fill")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 41, height: 33)
-                .foregroundStyle(.black)
-                .padding(.vertical, 14)
-                .padding(.horizontal, 38)
-                .background(Color(.lemonGreen).cornerRadius(20))
+            NavigationLink {
+                CameraView(lastQuestion: lastQuestion, onFinish: onFinish)
+            } label: {
+                Image(systemName: "camera.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 41, height: 33)
+                    .foregroundStyle(.black)
+                    .padding(.vertical, 14)
+                    .padding(.horizontal, 38)
+                    .background(Color(.lemonGreen).cornerRadius(20))
+            }
         }
         .navigationTitle("Desafio")
         .padding(.horizontal, 40)
@@ -57,6 +64,6 @@ struct ChallengeView: View {
     }
 }
 
-#Preview {
-    ChallengeView()
-}
+//#Preview {
+//    ChallengeView()
+//}
