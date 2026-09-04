@@ -14,7 +14,8 @@ struct DescriptionView: View {
     @State private var goToCategory = false
     
     @FocusState private var isDescriptionFocused: Bool
-
+    
+    let totalQuestion: Int
     
     var body: some View {
             ScrollView {
@@ -23,7 +24,7 @@ struct DescriptionView: View {
                         .font(.custom("Poppins-SemiBold", size: 20))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 20)
-                        .padding(.vertical, 16)
+                        .padding(.vertical, 15)
                     
                     ZStack(alignment: .topLeading) {
                         
@@ -82,7 +83,8 @@ struct DescriptionView: View {
                     
                     Spacer()
                     
-                    OllieView(x: 0.5, y: 14, yEyes: 0.02)
+                    OllieView(yEyes: 0.02)
+                        .offset(y:100)
                         .scaleEffect(2)
                 }
             }
@@ -91,7 +93,7 @@ struct DescriptionView: View {
                 isDescriptionFocused = false
             }
             .navigationDestination(isPresented: $goToCategory) {
-                CategoryView()
+                CategoryView(totalQuestion: totalQuestion)
             }
         .navigationTitle("Informações")
         .navigationBarTitleDisplayMode(.inline)
@@ -111,6 +113,6 @@ struct DescriptionView: View {
             goToCategory = true } }
 }
 
-#Preview {
-    DescriptionView()
-}
+//#Preview {
+//    DescriptionView()
+//}

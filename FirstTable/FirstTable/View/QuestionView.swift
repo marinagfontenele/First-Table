@@ -13,7 +13,8 @@ struct QuestionView: View {
     @State private var showAlert: Bool = false
     
     @State private var currentQuestion: Int = 1
-    @State private var totalQuestion: Int = 5
+    let totalQuestion: Int
+    @State private var showChallengeView: Bool = false
     
     @State private var question: String = "Se voce dormisse e acordasse com o dobro da sua idade, o que iria fazer?"
     
@@ -47,8 +48,9 @@ struct QuestionView: View {
             
             ZStack{
                 
-                OllieView(x: 0.20, y: 0.22, yEyes: 0.02)
-                .scaleEffect(0.6)
+                OllieView(yEyes: 12)
+                    .offset(x:-100,y: -200)
+                    .scaleEffect(0.6)
                 
                 
                 Text(question)
@@ -77,7 +79,7 @@ struct QuestionView: View {
                     ImgButton(imageName: "arrow.right").padding(.horizontal, 140).padding(10)
                 }
             }
-        
+        .background(Color.bgBlack.ignoresSafeArea())
         .navigationTitle("Perguntas")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
@@ -88,6 +90,12 @@ struct QuestionView: View {
                     Image(systemName: "xmark")
                 }
 
+            }
+        }
+        .navigationDestination(isPresented: $showChallengeView) {
+            ChallengeView{
+                currentQuestion += 1
+                showChallengeView.toggle()
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -104,7 +112,9 @@ struct QuestionView: View {
     }
     
     func goForward() {
-        if currentQuestion < totalQuestion {
+        if currentQuestion % 3 == 0{
+            showChallengeView = true
+        } else if currentQuestion < totalQuestion {
             currentQuestion += 1
         }
     }
@@ -112,6 +122,6 @@ struct QuestionView: View {
 
 
 
-#Preview {
-    QuestionView()
-}
+//#Preview {
+//    QuestionView()
+//}

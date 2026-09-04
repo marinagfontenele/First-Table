@@ -12,42 +12,45 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack {
-                    Spacer(minLength: 150)
-                    
-                    Text("Konver\nsácio")
-                        .font(Font.custom("Poppins-SemiBold", size: 60, relativeTo: .title))
-                    
-                    Spacer(minLength: 150)
-                    
-                    NavigationLink {
-                        InformationsView()
-                    } label: {
-                        MainButtonView(title: "Iniciar")
+            ZStack{
+                GridBackground()
+                ScrollView {
+                    VStack {
+                        Spacer(minLength: 150)
+                        
+                        Image("logo")
+                            .offset(x:-20)
+                        
+                        Spacer(minLength: 75)
+                        
+                        NavigationLink {
+                            InformationsView()
+                        } label: {
+                            MainButtonView(title: "Iniciar")
+                        }
+                        .padding(.horizontal, 75)
+                        .padding(.vertical, 15)
+                        
+    //                    Button {
+    //
+    //                    } label: {
+    //                        MainButtonView(title: "Galeria")
+    //                    }
+    //                    .padding(.horizontal, 40)
+    //                    .padding(.vertical, 8)
+                        
+                        
+                        NavigationLink {
+                            TutorialView()
+                        } label: {
+                            MainButtonView(title: "Tutorial")
+                        }
+                        .padding(.horizontal, 75)
+                        
+                        Spacer()
                     }
-                    .padding(.horizontal, 40)
-                    .padding(.vertical, 15)
-                    
-//                    Button {
-//                        
-//                    } label: {
-//                        MainButtonView(title: "Galeria")
-//                    }
-//                    .padding(.horizontal, 40)
-//                    .padding(.vertical, 8)
-                    
-                    
-                    NavigationLink {
-                        TutorialView()
-                    } label: {
-                        MainButtonView(title: "Tutorial")
-                    }
-                    .padding(.horizontal, 40)
-                    
-                    Spacer()
+                    .padding()
                 }
-                .padding()
             }
         }.navigationBarBackButtonHidden(true)
     }

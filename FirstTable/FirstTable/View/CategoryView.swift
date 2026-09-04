@@ -10,6 +10,7 @@ import SwiftUI
 struct CategoryView: View {
     @State var name: String = ""
     @State var selected: Category? = nil
+    let totalQuestion: Int
     
     var body: some View {
      
@@ -20,6 +21,7 @@ struct CategoryView: View {
                         Text("Selecione categorias pelas quais o grupo se interessa:")
                             .font(Font.custom("Poppins-SemiBold", size: 20))
                             .padding(.horizontal, 20)
+                            .padding(.vertical, 15)
                         
                         HStack (spacing: 20){
 
@@ -56,7 +58,7 @@ struct CategoryView: View {
                         .padding(.horizontal, 16)
                         
                         NavigationLink {
-                            QuestionView()
+                            QuestionView(totalQuestion: totalQuestion)
                         } label: {
                             MainButtonView(title: "Continuar")
                         }
@@ -72,6 +74,6 @@ struct CategoryView: View {
     }
 }
 
-#Preview {
-    CategoryView()
-}
+//#Preview {
+//    CategoryView()
+//}

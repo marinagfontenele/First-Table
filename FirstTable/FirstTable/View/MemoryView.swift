@@ -85,6 +85,7 @@ struct MemoryThreePicturesView: View {
                 Image("memorySmileFace")
                     .offset(x: 75, y: 75)
             }
+            .background(Color.bgBlack.ignoresSafeArea())
             .navigationTitle("Memória")
             .navigationBarTitleDisplayMode(.inline)
         }
