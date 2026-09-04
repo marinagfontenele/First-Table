@@ -12,6 +12,7 @@ struct DescriptionView: View {
     @State private var description: String = ""
     @State private var showError = false
     @State private var goToCategory = false
+    @State var numberQuestions: Int = 0
     
     @FocusState private var isDescriptionFocused: Bool
     

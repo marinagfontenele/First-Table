@@ -9,12 +9,16 @@ import SwiftUI
 
 struct CategoryButtonView: View {
     @State var selectedCategory: Category? = nil
-    @State var category: Category? = nil
+    let category: Category
+    @Binding var selectedCategories: [Category]
     
     var body: some View {
         ZStack {
             if (selectedCategory == category) {
                 Button {
+                    if let indice = selectedCategories.firstIndex(of: selectedCategory!) {
+                        selectedCategories.remove(at: indice)
+                    }
                     withAnimation(.easeInOut(duration: 0.2)) {
                         selectedCategory = nil
                     }
@@ -23,13 +27,13 @@ struct CategoryButtonView: View {
                         ZStack {
                             Image("whiteCategory")
                             
-                            Text("\(category!.image)")
+                            Text("\(category.image)")
                                 .padding(.bottom, 10)
                         }
                         .padding(.top, 14)
                         .padding(.bottom, -7)
                         
-                        Text("\(category!.name)")
+                        Text("\(category.name)")
                             .font(Font.custom("Poppins-SemiBold", size: 13))
                             .foregroundStyle(.black)
                             .padding(.horizontal, 15)
@@ -51,18 +55,19 @@ struct CategoryButtonView: View {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         selectedCategory = category
                     }
+                    selectedCategories.append(selectedCategory!)
                 } label: {
                     VStack {
                         ZStack {
                             Image("greenCategory")
                             
-                            Text("\(category!.image)")
+                            Text("\(category.image)")
                                 .padding(.bottom, 10)
                         }
                         .padding(.top, 14)
                         .padding(.bottom, -7)
                         
-                        Text("\(category!.name)")
+                        Text("\(category.name)")
                             .font(Font.custom("Poppins-SemiBold", size: 13))
                             .foregroundStyle(.white)
                             .padding(.horizontal, 15)
@@ -85,54 +90,7 @@ struct CategoryButtonView: View {
     }
 }
 
-//func CategoryButtonView(category: Category, name: String, image: Image?) -> some View {
-//    var selectedCategory: Category? = nil
-//
-//    ZStack {
-//        if (selectedCategory == category) {
-//            Button {
-//                selectedCategory = nil
-//            } label: {
-//                Text("05")
-//                    .font(Font.custom("Poppins-SemiBold", size: 24))
-//                    .foregroundStyle(.black)
-//                    .padding(.horizontal, 21)
-//                    .padding(.vertical, 14)
-//            }
-//            .overlay {
-//                RoundedRectangle(cornerRadius: 8, style: .continuous)
-//                    .stroke(Color(.lemonGreen), lineWidth: 2)
-//            }
-//            .background(
-//                Color(.lemonGreen)
-//                    .cornerRadius(8)
-//            )
-//            .padding(.leading, 23)
-//        } else {
-//            Button {
-//                selectedCategory = category
-//            } label: {
-//                Text("05")
-//                    .font(Font.custom("Poppins-SemiBold", size: 24))
-//                    .foregroundStyle(.white)
-//                    .padding(.horizontal, 21)
-//                    .padding(.vertical, 14)
-//            }
-//            .overlay {
-//                RoundedRectangle(cornerRadius: 8, style: .continuous)
-//                    .stroke(Color(.lemonGreen), lineWidth: 2)
-//            }
-//            .background(
-//                Color(.lemonGreen)
-//                    .opacity(0.12)
-//            )
-//            .padding(.leading, 23)
-//        }
-//    }
-//}
-
-
 
 #Preview {
-    CategoryButtonView(selectedCategory: .cooking, category: .confessions)
+    CategoryButtonView(selectedCategory: .cooking, category: .confessions, selectedCategories: .constant([.cooking, .chaos]))
 }

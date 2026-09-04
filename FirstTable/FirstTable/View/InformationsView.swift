@@ -10,6 +10,7 @@ import SwiftUI
 struct InformationsView: View {
     @State var name: String = ""
     @State var selectedRound: rounds? = nil
+    @State var numberRounds: Int = 0
     @State private var showError = false
     @State private var goToDescription = false
     
@@ -186,9 +187,8 @@ struct InformationsView: View {
                         .stroke(Color(.lemonGreen), lineWidth: 2)
                 }
                 .background(
-                    Color(.lemonGreen)
+                    Color(.lemonBackground)
                         .cornerRadius(20)
-                        .opacity(0.12)
                 )
                 .padding(.leading, 20)
             }
@@ -223,7 +223,6 @@ struct InformationsView: View {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         selectedRound = .ten
                         isNameFieldFocused = false
-
                     }
                     totalQuestion = 10
                 } label: {
@@ -274,7 +273,6 @@ struct InformationsView: View {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         selectedRound = .fifteen
                         isNameFieldFocused = false
-
                     }
                     totalQuestion = 15
                 } label: {
