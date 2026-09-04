@@ -40,6 +40,7 @@ struct CameraView: View {
             .padding(.top)
         }
         
+        
         .navigationTitle("Desafio")
         .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(isPresented: $showConfirmation) {
@@ -72,6 +73,7 @@ struct CameraView: View {
         .task {
             await cameraService.prepare()
         }
+        
             
     }
     

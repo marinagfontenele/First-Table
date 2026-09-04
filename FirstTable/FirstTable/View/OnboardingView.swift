@@ -48,6 +48,7 @@ struct OnboardingView: View {
                     UIPageControl.appearance().currentPageIndicatorTintColor = .lemonGreen
                 }
             }
+            
             .toolbarVisibility(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

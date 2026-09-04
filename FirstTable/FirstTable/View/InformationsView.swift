@@ -26,6 +26,7 @@ struct InformationsView: View {
                                     .font(Font.custom("Poppins-SemiBold", size: 20))
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.horizontal, 20)
+                                    .padding(.vertical, 15)
                                 
                                 TextField("Ex: Os Besties", text: $name)
                                     .font(Font.custom("Poppins-SemiBold", size: 15))
@@ -101,7 +102,9 @@ struct InformationsView: View {
                         
                         Spacer()
                         
-                        OllieView(x: 0.5, y: 16, yEyes: 0.02)
+                        OllieView(yEyes: 0.02)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .offset(y:100)
                             .scaleEffect(2)
                     }
                 }

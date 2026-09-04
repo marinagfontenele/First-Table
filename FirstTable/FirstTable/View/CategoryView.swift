@@ -20,6 +20,7 @@ struct CategoryView: View {
                         Text("Selecione categorias pelas quais o grupo se interessa:")
                             .font(Font.custom("Poppins-SemiBold", size: 20))
                             .padding(.horizontal, 20)
+                            .padding(.vertical, 15)
                         
                         HStack (spacing: 20){
 

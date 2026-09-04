@@ -47,8 +47,9 @@ struct QuestionView: View {
             
             ZStack{
                 
-                OllieView(x: 0.20, y: 0.22, yEyes: 0.02)
-                .scaleEffect(0.6)
+                OllieView(yEyes: 12)
+                    .offset(x:-100,y: -200)
+                    .scaleEffect(0.6)
                 
                 
                 Text(question)
@@ -77,7 +78,7 @@ struct QuestionView: View {
                     ImgButton(imageName: "arrow.right").padding(.horizontal, 140).padding(10)
                 }
             }
-        
+        .background(Color.bgBlack.ignoresSafeArea())
         .navigationTitle("Perguntas")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{

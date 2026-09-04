@@ -13,12 +13,9 @@ struct EyePosition {
 
 struct OllieView: View {
     
-    let x: CGFloat
-    let y: CGFloat
     let yEyes: CGFloat
     
     var body: some View {
-        GeometryReader { geometry in
             
             KeyframeAnimator(
                 initialValue: EyePosition(),
@@ -38,7 +35,7 @@ struct OllieView: View {
                         .frame(width: 61.52, height: 61.52)
                         .offset(
                             x: -34.515,
-                            y: -66.815 + yEyes
+                            y: -66.815
                         )
                     
                     // Olho direito
@@ -47,7 +44,7 @@ struct OllieView: View {
                         .frame(width: 61.52, height: 61.52)
                         .offset(
                             x: 33.48,
-                            y: -66.815 + yEyes
+                            y: -66.815
                         )
                     
                     // Pupila esquerda
@@ -56,7 +53,7 @@ struct OllieView: View {
                         .frame(width: 38.315, height: 35.83)
                         .offset(
                             x: -33.95 + value.x,
-                            y: -73.585 + (geometry.size.height * yEyes)
+                            y: -73.585 + yEyes
                         )
                     
                     // Pupila direita
@@ -65,13 +62,10 @@ struct OllieView: View {
                         .frame(width: 38.315, height: 35.83)
                         .offset(
                             x: 33.455 + value.x,
-                            y: -73.585 + (geometry.size.height * yEyes)
+                            y: -73.585 + yEyes
                         )
                 }
-                .position(
-                    x: geometry.size.width * x,
-                    y: geometry.size.height * y
-                )
+                .frame(width: 262.22, height: 245)
                 
             } keyframes: { _ in
                 
@@ -84,9 +78,9 @@ struct OllieView: View {
                 }
             }
         }
-    }
+    
 }
 
 #Preview {
-    OllieView(x: 0.5, y: 0.25, yEyes: 0.0)
+    OllieView(yEyes: 0)
 }
