@@ -16,6 +16,7 @@ struct QuestionView: View {
     let totalQuestion: Int
     @State private var showChallengeView: Bool = false
     @State private var showMemoryView: Bool = false
+    @State var modelService = FoundationModelsSession()
     
     @State private var question: String = "Se voce dormisse e acordasse com o dobro da sua idade, o que iria fazer?"
     
@@ -36,8 +37,6 @@ struct QuestionView: View {
                         .foregroundStyle(Color.lemonGreen)
                 }
                 
-                
-                
                 Spacer()
                 
                 Text("\(currentQuestion)/\(totalQuestion)")
@@ -48,13 +47,11 @@ struct QuestionView: View {
             Spacer()
             
             ZStack{
-                
                 OllieView(yEyes: 12)
                     .offset(x:-100,y: -200)
                     .scaleEffect(0.6)
                 
-                
-                Text(question)
+                Text(modelService.questions[currentQuestion - 1].text)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
                     .padding(.top,50)
@@ -70,8 +67,8 @@ struct QuestionView: View {
                             .offset(y: 20)
                     }
                     .padding(.bottom, 70)
-            }
                 
+            }
                 Spacer()
                 
                 Button {
@@ -130,6 +127,6 @@ struct QuestionView: View {
 
 
 
-//#Preview {
-//    QuestionView()
-//}
+#Preview {
+    QuestionView(totalQuestion: 5)
+}

@@ -298,6 +298,6 @@ struct InformationsView: View {
     
 }
 
-//#Preview {
-//    InformationsView()
-//}
+#Preview {
+    InformationsView()
+}
