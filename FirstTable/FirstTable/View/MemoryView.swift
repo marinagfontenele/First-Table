@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MemoryFivePicturesView: View {
+    @Bindable var photoSession: PhotoSession
     var body: some View {
         NavigationStack{
             ZStack{
@@ -23,27 +24,27 @@ struct MemoryFivePicturesView: View {
                     Image("memoryAsset1")
                         .offset(x: -152, y: -140)
                     Image("memoryAsset3")
-                        .offset(x: -100, y: 225)
+                        .offset(x: -115, y: 210)
                     
-                    PolaroidFrameGroup()
+                    PolaroidFrameGroup(photo: photoSession.results[0])
                         .offset(x:-15, y: -200)
-                    PolaroidFrameVertical()
+                    PolaroidFrameTextAtBottom(photo: photoSession.results[1])
                         .offset(x: 90, y: 150)
                         .rotationEffect(Angle(degrees: 15))
-                    PolaroidFrameVertical()
+                    PolaroidFrameTextAtBottom(photo: photoSession.results[2])
                         .offset(x: 60, y: -25)
                         .rotationEffect(Angle(degrees: 5))
-                    PolaroidFrameVertical()
-                        .offset(x: -120, y: 105)
-                        .rotationEffect(Angle(degrees: -20))
-                    PolaroidFrameVertical()
+                    PolaroidFrameTextAtBottom(photo: photoSession.results[3])
+                        .offset(x: -110, y: 150)
+                        .rotationEffect(Angle(degrees: -10))
+                    PolaroidFrameTextAtBottom(photo: photoSession.results[4])
                         .offset(x: -70, y: -35)
                         .rotationEffect(Angle(degrees: -5))
                     
                     Image("memoryAsset2")
                         .offset(x: 100, y: 275)
                     Image("memorySmileFace")
-                        .offset(x: 100, y: -115)
+                        .offset(x: 100, y: -140)
                 }
                 .offset(x: 15, y: 20)
                 
@@ -55,6 +56,7 @@ struct MemoryFivePicturesView: View {
 }
 
 struct MemoryThreePicturesView: View {
+    @Bindable var photoSession: PhotoSession
     var body: some View {
         NavigationStack{
             ZStack{
@@ -73,11 +75,11 @@ struct MemoryThreePicturesView: View {
                 Image("memoryAsset3")
                     .offset(x:50, y: -250)
                 
-                PolaroidFrameGroup()
+                PolaroidFrameTextAtTop(photo: photoSession.results[1])
                     .offset(x:-40, y: -190)
-                PolaroidFrameGroup()
+                PolaroidFrameGroup(photo: photoSession.results[0])
                     .offset(x:40, y: 200)
-                PolaroidFrameGroup()
+                PolaroidFrameTextAtTop(photo: photoSession.results[2])
                 
                 
                 Image("memoryAsset2")
@@ -92,6 +94,6 @@ struct MemoryThreePicturesView: View {
     }
 }
 
-#Preview {
-    MemoryThreePicturesView()
-}
+//#Preview {
+//    MemoryThreePicturesView()
+//}

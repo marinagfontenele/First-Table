@@ -10,7 +10,12 @@ import SwiftUI
 struct CategoryView: View {
     @State var name: String = ""
     @State var selected: Category? = nil
+    
     let totalQuestion: Int
+    let groupName: String
+    @Bindable var photoSession: PhotoSession
+    
+    @State private var showQuestionView: Bool = false
     
     var body: some View {
      
@@ -58,7 +63,9 @@ struct CategoryView: View {
                         .padding(.horizontal, 16)
                         
                         NavigationLink {
-                            QuestionView(totalQuestion: totalQuestion)
+                            ChallengeView(onConfirm: {
+                                showQuestionView = true
+                            }, photoSession: photoSession)
                         } label: {
                             MainButtonView(title: "Continuar")
                         }
@@ -66,6 +73,14 @@ struct CategoryView: View {
                         .padding(.vertical, 8)
                         
                         Spacer()
+                    }
+                    .onAppear{
+                        if !photoSession.hasStarted{
+                            photoSession.start(totalQuestions: totalQuestion, firstTaskName: groupName)
+                        }
+                    }
+                    .navigationDestination(isPresented: $showQuestionView){
+                        QuestionView(photoSession: photoSession)
                     }
                 }
             }

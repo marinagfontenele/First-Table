@@ -15,9 +15,9 @@ struct CameraView: View {
     @State private var capturedImage: UIImage?
     @State private var showConfirmation: Bool = false
     
-    let lastQuestion: Bool
+    @Bindable var photoSession: PhotoSession
     
-    let onFinish: () -> Void
+    let onConfirm: () -> Void
     
     var body: some View {
         VStack /*ZStack(alignment: .bottom)*/{
@@ -49,7 +49,11 @@ struct CameraView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(isPresented: $showConfirmation) {
             if let capturedImage {
-                PhotoConfirmationView(image: capturedImage, onConfirm: {onFinish()}, lastQuestion: lastQuestion)
+                PhotoConfirmationView(
+                    image: capturedImage,
+                    onConfirm: onConfirm,
+                    photoSession: photoSession
+                )
             }
         }
         .toolbar{
@@ -82,9 +86,9 @@ struct CameraView: View {
     func captureImage() {
         Task {
             do {
-                let capturedImage2 = try await cameraService.capturePhoto()
+                let photo = try await cameraService.capturePhoto()
                 
-                capturedImage = capturedImage2.uiImage
+                capturedImage = photo.uiImage
                 
                 showConfirmation.toggle()
             } catch {

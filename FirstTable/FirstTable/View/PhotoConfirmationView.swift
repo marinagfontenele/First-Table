@@ -11,9 +11,11 @@ struct PhotoConfirmationView: View {
     let image: UIImage
     let onConfirm: () -> Void
     @State private var scale: CGFloat = 0.6
-    let lastQuestion: Bool
+    
     
     @State private var showMemoryView: Bool = false
+    
+    @Bindable var photoSession: PhotoSession
     
     var body: some View {
         ZStack{
@@ -40,18 +42,34 @@ struct PhotoConfirmationView: View {
         .toolbar{
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    if lastQuestion {
-                        showMemoryView = true
-                    } else {
-                        onConfirm()
-                    }
+                    confirmPhoto()
                 } label: {
                     Image(systemName: "checkmark")
                 }
             }
         }
         .navigationDestination(isPresented: $showMemoryView){
-            MemoryFivePicturesView()
+            if photoSession.totalQuestions == 5 {
+                MemoryThreePicturesView(photoSession: photoSession)
+            } else {
+                MemoryFivePicturesView(photoSession: photoSession)
+            }
+        }
+    }
+    
+    private func confirmPhoto(){
+        photoSession.saveCurrentPhoto(image)
+        
+        let finishedQuestions = photoSession.currentQuestion >= photoSession.totalQuestions
+        let finishedPhotos = photoSession.isLastPhoto
+        
+        if !finishedPhotos {
+            photoSession.goToNextPhoto()
+        }
+        if finishedQuestions && finishedPhotos {
+            showMemoryView = true
+        } else {
+            onConfirm()
         }
     }
 }

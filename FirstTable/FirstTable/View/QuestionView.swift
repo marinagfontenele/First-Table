@@ -13,9 +13,14 @@ struct QuestionView: View {
     @State private var showAlert: Bool = false
     
     @State private var currentQuestion: Int = 1
-    let totalQuestion: Int
+    @Bindable var photoSession: PhotoSession
     @State private var showChallengeView: Bool = false
     @State private var showMemoryView: Bool = false
+    
+    var progress: CGFloat {
+        guard photoSession.totalQuestions > 0 else { return 0 }
+        return CGFloat(photoSession.currentQuestion) / CGFloat(photoSession.totalQuestions)
+    }
     
     @State private var question: String = "Se voce dormisse e acordasse com o dobro da sua idade, o que iria fazer?"
     
@@ -30,7 +35,7 @@ struct QuestionView: View {
                     
                     RoundedRectangle(cornerRadius: 50)
                         .frame(
-                            width: 280*CGFloat(currentQuestion)/CGFloat(totalQuestion),
+                            width: 280*progress,
                             height: 5
                         )
                         .foregroundStyle(Color.lemonGreen)
@@ -40,7 +45,7 @@ struct QuestionView: View {
                 
                 Spacer()
                 
-                Text("\(currentQuestion)/\(totalQuestion)")
+                Text("\(photoSession.currentQuestion)/\(photoSession.totalQuestions)")
             }
             .padding()
             .padding(.horizontal,10)
@@ -95,14 +100,18 @@ struct QuestionView: View {
         }
         .navigationDestination(isPresented: $showChallengeView) {
             ChallengeView(
-                lastQuestion: currentQuestion == totalQuestion,
-                onFinish: {
-                    currentQuestion += 1
+                onConfirm: {
                     showChallengeView = false
-                })
+                },
+                photoSession: photoSession
+            )
         }
         .navigationDestination(isPresented: $showMemoryView){
-            MemoryFivePicturesView()
+            if photoSession.totalQuestions == 5 {
+                MemoryThreePicturesView(photoSession: photoSession)
+            } else {
+                MemoryFivePicturesView(photoSession: photoSession)
+            }
         }
         .navigationBarBackButtonHidden(true)
         .alert("Tem certeza que deseja sair?", isPresented: $showAlert) {
@@ -118,13 +127,18 @@ struct QuestionView: View {
     }
     
     func goForward() {
-        if currentQuestion % 3 == 0{
+        let questionJustFinished = photoSession.currentQuestion
+        if photoSession.shouldTakePhoto(afterQuestion: questionJustFinished){
+            photoSession.goToNextQuestion()
             showChallengeView = true
-        } else if currentQuestion == totalQuestion {
-            showMemoryView = true
-        } else {
-            currentQuestion += 1
+            return
         }
+        if questionJustFinished == photoSession.totalQuestions {
+            showMemoryView = true
+            return
+        }
+        
+        photoSession.goToNextQuestion()
     }
 }
 

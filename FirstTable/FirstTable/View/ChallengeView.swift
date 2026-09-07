@@ -10,8 +10,9 @@ import SwiftUI
 struct ChallengeView: View {
     @State private var isPresented: Bool = false
     @State private var scale = 0.4
-    let lastQuestion: Bool
-    let onFinish:  () -> Void
+    let onConfirm:  () -> Void
+    
+    @Bindable var photoSession: PhotoSession
     
     var body: some View {
         VStack {
@@ -35,17 +36,22 @@ struct ChallengeView: View {
                 Image("PurpleSpeech")
                     .padding(.bottom,50)
                 
-                Text("Quem é o mais animado?")
-                    .font(.custom("Poppins-SemiBold", size: 24))
-                    .padding(.horizontal, 35)
-                    .padding(.bottom,75)
-                    .multilineTextAlignment(.center)
+                if let task = photoSession.currentTask {
+                    Text(task.instruction)
+                        .font(.custom("Poppins-SemiBold", size: 24))
+                        .padding(.horizontal, 35)
+                        .padding(.bottom,75)
+                        .multilineTextAlignment(.center)
+                }
             }
             
             Spacer()
             
             NavigationLink {
-                CameraView(lastQuestion: lastQuestion, onFinish: onFinish)
+                CameraView(
+                    photoSession: photoSession,
+                    onConfirm: onConfirm
+                )
             } label: {
                 Image(systemName: "camera.fill")
                     .resizable()
