@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct InformationsView: View {
-    @State var name: String = ""
+    @State var groupName: String = ""
     @State var selectedRound: rounds? = nil
     @State private var showError = false
     @State private var goToDescription = false
     
     @State private var totalQuestion: Int? = nil
-    
     
     @FocusState private var isNameFieldFocused: Bool
     
@@ -30,13 +29,13 @@ struct InformationsView: View {
                                     .padding(.horizontal, 20)
                                     .padding(.vertical, 15)
                                 
-                                TextField("Ex: Os Besties", text: $name)
+                                TextField("Ex: Os Besties", text: $groupName)
                                     .font(Font.custom("Poppins-SemiBold", size: 15))
                                     .foregroundStyle(.white)
                                     .padding(15)
                                     .overlay {
                                         RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                            .stroke(showError && name.trimmingCharacters(in:
+                                            .stroke(showError && groupName.trimmingCharacters(in:
                                                     .whitespacesAndNewlines).isEmpty ? .red : Color.lemonGreen, lineWidth: 2)
                                     }
                                     .background(
@@ -45,7 +44,7 @@ struct InformationsView: View {
                                     .focused($isNameFieldFocused)
                                     .padding(.horizontal, 20)
                                 
-                                if showError && name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                                if showError && groupName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                                     Text("Digite um nome para o grupo")
                                         .font(.custom("Poppins-SemiBold", size: 13))
                                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -118,7 +117,10 @@ struct InformationsView: View {
             }
             .navigationDestination(isPresented: $goToDescription) {
                 if let totalQuestion {
-                    DescriptionView(totalQuestion: totalQuestion)
+                    DescriptionView(
+                        totalQuestion: totalQuestion,
+                        groupName: groupName
+                    )
                 }
             }
         
@@ -126,7 +128,7 @@ struct InformationsView: View {
     }
     
     private func validateAndContinue() {
-        let nameIsEmpty = name
+        let nameIsEmpty = groupName
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .isEmpty
         
