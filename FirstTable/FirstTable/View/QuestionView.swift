@@ -16,6 +16,7 @@ struct QuestionView: View {
     @Bindable var photoSession: PhotoSession
     @State private var showChallengeView: Bool = false
     @State private var showMemoryView: Bool = false
+    @State var modelService = FoundationModelsSession()
     
     var progress: CGFloat {
         guard photoSession.totalQuestions > 0 else { return 0 }
@@ -41,8 +42,6 @@ struct QuestionView: View {
                         .foregroundStyle(Color.lemonGreen)
                 }
                 
-                
-                
                 Spacer()
                 
                 Text("\(photoSession.currentQuestion)/\(photoSession.totalQuestions)")
@@ -53,13 +52,11 @@ struct QuestionView: View {
             Spacer()
             
             ZStack{
-                
                 OllieView(yEyes: 12)
                     .offset(x:-100,y: -200)
                     .scaleEffect(0.6)
                 
-                
-                Text(question)
+                Text(modelService.questions[currentQuestion - 1].text)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
                     .padding(.top,50)
@@ -75,8 +72,8 @@ struct QuestionView: View {
                             .offset(y: 20)
                     }
                     .padding(.bottom, 70)
-            }
                 
+            }
                 Spacer()
                 
                 Button {
@@ -144,6 +141,6 @@ struct QuestionView: View {
 
 
 
-//#Preview {
-//    QuestionView()
-//}
+#Preview {
+    QuestionView(totalQuestion: 5)
+}

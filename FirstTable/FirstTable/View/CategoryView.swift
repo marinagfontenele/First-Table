@@ -10,7 +10,8 @@ import SwiftUI
 struct CategoryView: View {
     @State var name: String = ""
     @State var selected: Category? = nil
-    
+    @State var categories: [Category] = []
+    @State var description: String = ""
     let totalQuestion: Int
     let groupName: String
     @Bindable var photoSession: PhotoSession
@@ -18,7 +19,6 @@ struct CategoryView: View {
     @State private var showQuestionView: Bool = false
     
     var body: some View {
-     
             ScrollView {
                 HStack {
                     VStack(alignment: .leading) {
@@ -30,42 +30,40 @@ struct CategoryView: View {
                         
                         HStack (spacing: 20){
 
-                            CategoryButtonView(selectedCategory: selected, category: .cooking)
+                            CategoryButtonView(selectedCategory: selected, category: .cooking, selectedCategories: $categories)
                             
-                            CategoryButtonView(selectedCategory: selected, category: .music)
+                            CategoryButtonView(selectedCategory: selected, category: .music, selectedCategories: $categories)
                             
-                            CategoryButtonView(selectedCategory: selected, category: .games)
+                            CategoryButtonView(selectedCategory: selected, category: .games, selectedCategories: $categories)
                         }
                         .padding(.vertical, 8)
                         .padding(.horizontal, 16)
                     
                         HStack (spacing: 20){
 
-                            CategoryButtonView(selectedCategory: selected, category: .movies)
+                            CategoryButtonView(selectedCategory: selected, category: .movies, selectedCategories: $categories)
                             
-                            CategoryButtonView(selectedCategory: selected, category: .confessions)
+                            CategoryButtonView(selectedCategory: selected, category: .confessions, selectedCategories: $categories)
                             
-                            CategoryButtonView(selectedCategory: selected, category: .chaos)
+                            CategoryButtonView(selectedCategory: selected, category: .chaos, selectedCategories: $categories)
                         }
                         .padding(.vertical, 0)
                         .padding(.horizontal, 16)
                         
                         HStack (spacing: 20){
 
-                            CategoryButtonView(selectedCategory: selected, category: .decisions)
+                            CategoryButtonView(selectedCategory: selected, category: .decisions, selectedCategories: $categories)
                             
-                            CategoryButtonView(selectedCategory: selected, category: .gossip)
+                            CategoryButtonView(selectedCategory: selected, category: .gossip, selectedCategories: $categories)
                             
-                            CategoryButtonView(selectedCategory: selected, category: .situations)
+                            CategoryButtonView(selectedCategory: selected, category: .situations, selectedCategories: $categories)
                         }
                         .padding(.bottom, 40)
                         .padding(.vertical, 8)
                         .padding(.horizontal, 16)
                         
                         NavigationLink {
-                            ChallengeView(onConfirm: {
-                                showQuestionView = true
-                            }, photoSession: photoSession)
+                            LoadingView(totalQuestion: totalQuestion, categories: categories, description: description)
                         } label: {
                             MainButtonView(title: "Continuar")
                         }
@@ -85,10 +83,10 @@ struct CategoryView: View {
                 }
             }
             .background(Color.bgBlack.ignoresSafeArea())
-        .navigationTitle("Informações")
+            .navigationTitle("Informações")
     }
 }
 
-//#Preview {
-//    CategoryView()
-//}
+#Preview {
+    CategoryView(totalQuestion: 5)
+}

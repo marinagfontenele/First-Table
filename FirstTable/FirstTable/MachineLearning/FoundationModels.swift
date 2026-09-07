@@ -29,3 +29,7 @@ struct FoudationModels: View {
         }
     }
 }
+
+#Preview {
+    FoudationModels()
+}
