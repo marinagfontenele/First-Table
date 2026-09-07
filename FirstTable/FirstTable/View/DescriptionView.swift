@@ -16,6 +16,8 @@ struct DescriptionView: View {
     @FocusState private var isDescriptionFocused: Bool
     
     let totalQuestion: Int
+    let groupName: String
+    @State var photoSession: PhotoSession = PhotoSession()
     
     var body: some View {
             ScrollView {
@@ -93,7 +95,11 @@ struct DescriptionView: View {
                 isDescriptionFocused = false
             }
             .navigationDestination(isPresented: $goToCategory) {
-                CategoryView(totalQuestion: totalQuestion)
+                CategoryView(
+                    totalQuestion: totalQuestion,
+                    groupName: groupName,
+                    photoSession: photoSession
+                )
             }
         .navigationTitle("Informações")
         .navigationBarTitleDisplayMode(.inline)

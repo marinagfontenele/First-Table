@@ -13,6 +13,10 @@ struct CategoryView: View {
     @State var categories: [Category] = []
     @State var description: String = ""
     let totalQuestion: Int
+    let groupName: String
+    @Bindable var photoSession: PhotoSession
+    
+    @State private var showQuestionView: Bool = false
     
     var body: some View {
             ScrollView {
@@ -67,6 +71,14 @@ struct CategoryView: View {
                         .padding(.vertical, 8)
                         
                         Spacer()
+                    }
+                    .onAppear{
+                        if !photoSession.hasStarted{
+                            photoSession.start(totalQuestions: totalQuestion, firstTaskName: groupName)
+                        }
+                    }
+                    .navigationDestination(isPresented: $showQuestionView){
+                        QuestionView(photoSession: photoSession)
                     }
                 }
             }
