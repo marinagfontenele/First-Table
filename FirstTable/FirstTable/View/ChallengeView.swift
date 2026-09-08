@@ -13,6 +13,8 @@ struct ChallengeView: View {
     let onConfirm:  () -> Void
     
     @Bindable var photoSession: PhotoSession
+    @Bindable var modelService: FoundationModelsSession
+    
     
     var body: some View {
         VStack {
@@ -57,6 +59,7 @@ struct ChallengeView: View {
             NavigationLink {
                 CameraView(
                     photoSession: photoSession,
+                    modelService: modelService,
                     onConfirm: onConfirm
                 )
             } label: {

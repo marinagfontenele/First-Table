@@ -13,8 +13,9 @@ struct LoadingView: View {
     @State var description: String = ""
     @State var modelService = FoundationModelsSession()
     @State private var currentQuestion: Int = 1
-    @State var navigateToQuestions: Bool = false
+    @State var navigateToChallenge: Bool = false
     @Bindable var photoSession: PhotoSession
+    @State private var showQuestionView: Bool = false
     
     var body: some View {
         ZStack{
@@ -36,7 +37,12 @@ struct LoadingView: View {
         }
         .navigationBarBackButtonHidden(true)
         .background(Color.bgBlack.ignoresSafeArea())
-        .navigationDestination(isPresented: $navigateToQuestions) {
+        .navigationDestination(isPresented: $navigateToChallenge) {
+            ChallengeView(onConfirm: {
+                showQuestionView = true
+            },photoSession: photoSession, modelService: modelService)
+        }
+        .navigationDestination(isPresented: $showQuestionView){
             QuestionView(photoSession: photoSession, modelService: modelService)
         }
         .task {
@@ -46,7 +52,7 @@ struct LoadingView: View {
             
             await modelService.generateQuestions()
             
-            navigateToQuestions = true
+            navigateToChallenge = true
         }
     }
     

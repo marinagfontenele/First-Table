@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PolaroidFrameTextAtTop: View {
+struct PolaroidFrameTextAtBottom: View {
     
     let photo: PhotoResult
     
@@ -35,7 +35,7 @@ struct PolaroidFrameTextAtTop: View {
     }
 }
 
-struct PolaroidFrameTextAtBottom: View {
+struct PolaroidFrameTextAtTop: View {
     
     let photo: PhotoResult
     

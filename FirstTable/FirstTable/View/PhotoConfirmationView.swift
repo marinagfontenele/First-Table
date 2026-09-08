@@ -12,10 +12,10 @@ struct PhotoConfirmationView: View {
     let onConfirm: () -> Void
     @State private var scale: CGFloat = 0.6
     
-    
     @State private var showMemoryView: Bool = false
     
     @Bindable var photoSession: PhotoSession
+    @Bindable var modelService: FoundationModelsSession
     
     var body: some View {
         ZStack{

@@ -16,6 +16,7 @@ struct CameraView: View {
     @State private var showConfirmation: Bool = false
     
     @Bindable var photoSession: PhotoSession
+    @Bindable var modelService: FoundationModelsSession
     
     let onConfirm: () -> Void
     
@@ -52,7 +53,8 @@ struct CameraView: View {
                 PhotoConfirmationView(
                     image: capturedImage,
                     onConfirm: onConfirm,
-                    photoSession: photoSession
+                    photoSession: photoSession,
+                    modelService: modelService
                 )
             }
         }
