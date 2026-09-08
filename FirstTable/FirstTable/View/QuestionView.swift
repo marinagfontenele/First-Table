@@ -114,11 +114,7 @@ struct QuestionView: View {
             )
         }
         .navigationDestination(isPresented: $showMemoryView){
-            if photoSession.totalQuestions == 5 {
-                MemoryThreePicturesView(photoSession: photoSession)
-            } else {
-                MemoryFivePicturesView(photoSession: photoSession)
-            }
+            MemoryView(photoSession: photoSession)
         }
         .navigationBarBackButtonHidden(true)
         .alert("Tem certeza que deseja sair?", isPresented: $showAlert) {
