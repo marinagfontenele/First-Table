@@ -17,13 +17,22 @@ struct LoadingView: View {
     @Bindable var photoSession: PhotoSession
     
     var body: some View {
-        VStack {
-            ProgressView("Gerando perguntas...")
-                .font(.custom("Poppins-SemiBold", size: 18))
-                .foregroundColor(.lemonGreen)
-                .tint(.lemonGreen)
-                .padding()
-                .background(Color.lemonBackground)
+        ZStack{
+            Color(.bgBlack).ignoresSafeArea()
+            VStack(alignment: .center){
+                ProgressView()
+                    .scaleEffect(2)
+                    .tint(.lemonGreen)
+                    .padding()
+                
+                Text("Formulando\nPerguntas")
+                    .font(Font.custom("Poppins-SemiBold", size: 32))
+                    .multilineTextAlignment(.center)
+                
+                OllieView(yEyes: 0.02)
+                    .offset(y:160)
+                    .scaleEffect(2)
+            }
         }
         .navigationBarBackButtonHidden(true)
         .background(Color.bgBlack.ignoresSafeArea())
