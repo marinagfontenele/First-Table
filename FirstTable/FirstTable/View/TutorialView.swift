@@ -19,17 +19,40 @@ struct TutorialView: View {
             TabView(selection: $currentOption) {
                 ForEach(allPages) { option in
                     VStack(alignment: .center) {
-                        Image(option.imageName)
-                        
-                        Spacer()
-                        
-                        Text(option.title)
-                            .font(Font.custom("Poppins-SemiBold", size: 32))
-                            .padding(.bottom, 8)
-                        
-                        Text(option.subtitle)
-                            .font(Font.custom("Poppins-Regular", size: 20))
-                            .padding(.bottom, 50)
+                        ViewThatFits(in: .vertical) {
+                            VStack {
+                                Image(option.imageName)
+                                
+                                Spacer()
+                                
+                                Text(option.title)
+                                    .font(Font.custom("Poppins-SemiBold", size: 32))
+                                    .padding(.bottom, 8)
+                                    .multilineTextAlignment(.center)
+                                
+                                Text(option.subtitle)
+                                    .font(Font.custom("Poppins-Regular", size: 20))
+                                    .padding(.bottom, 50)
+                                    .multilineTextAlignment(.center)
+                            }
+                            
+                            ScrollView (showsIndicators: false){
+                                Image(option.imageName)
+                                
+                                Spacer()
+                                
+                                Text(option.title)
+                                    .font(Font.custom("Poppins-SemiBold", size: 32))
+                                    .padding(.bottom, 8)
+                                    .multilineTextAlignment(.center)
+                                
+                                Text(option.subtitle)
+                                    .font(Font.custom("Poppins-Regular", size: 20))
+                                    .padding(.bottom, 50)
+                                    .multilineTextAlignment(.center)
+                            }
+                        }
+
                     }
                     .background(Color(.systemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 10))
