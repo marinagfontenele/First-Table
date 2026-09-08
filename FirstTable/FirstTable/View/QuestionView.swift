@@ -73,6 +73,14 @@ struct QuestionView: View {
                     }
                     .padding(.bottom, 70)
                 
+//                Button {
+//                    for option in modelService.questions {
+//                        print(option.text)
+//                    }
+//                } label: {
+//                    ImgButton(imageName: "arrow.right").padding(.horizontal, 140).padding(10)
+//                }
+//                
             }
                 Spacer()
                 
@@ -142,5 +150,5 @@ struct QuestionView: View {
 
 
 //#Preview {
-//    QuestionView(totalQuestion: 5)
+//    QuestionView(photoSession: photoSession)
 //}
