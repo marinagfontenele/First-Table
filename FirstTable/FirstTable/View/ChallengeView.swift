@@ -30,13 +30,16 @@ struct ChallengeView: View {
             Text("Fotografia Relâmpago")
                 .font(.custom("Poppins-SemiBold", size: 24))
                 .foregroundStyle(.lemonGreen)
+                .padding(.vertical, 16)
                 .frame(maxWidth: .infinity, minHeight: 56)
+                .background(.bgBlack)
+                .cornerRadius(16)
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
                         .stroke(.lemonGreen, lineWidth: 5)
                 )
                 .offset(y: -60)
-                .padding(.horizontal,30)
+                .padding(.horizontal, 25)
                 .multilineTextAlignment(.center)
             
             Spacer()
