@@ -63,7 +63,7 @@ struct CategoryView: View {
                         .padding(.horizontal, 16)
                         
                         NavigationLink {
-                            LoadingView(totalQuestion: totalQuestion, categories: categories, description: description)
+                            LoadingView(totalQuestion: photoSession.totalQuestions, categories: categories, description: description, photoSession: photoSession)
                         } label: {
                             MainButtonView(title: "Continuar")
                         }
@@ -87,6 +87,6 @@ struct CategoryView: View {
     }
 }
 
-#Preview {
-    CategoryView(totalQuestion: 5)
-}
+//#Preview {
+//    CategoryView(totalQuestion: 5)
+//}

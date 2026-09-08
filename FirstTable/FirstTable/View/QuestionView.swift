@@ -141,6 +141,6 @@ struct QuestionView: View {
 
 
 
-#Preview {
-    QuestionView(totalQuestion: 5)
-}
+//#Preview {
+//    QuestionView(totalQuestion: 5)
+//}

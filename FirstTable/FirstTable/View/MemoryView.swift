@@ -77,9 +77,9 @@ struct MemoryThreePicturesView: View {
                 
                 PolaroidFrameTextAtTop(photo: photoSession.results[1])
                     .offset(x:-40, y: -190)
-                PolaroidFrameGroup(photo: photoSession.results[0])
-                    .offset(x:40, y: 200)
                 PolaroidFrameTextAtTop(photo: photoSession.results[2])
+                    .offset(x:40, y: 200)
+                PolaroidFrameGroup(photo: photoSession.results[0])
                 
                 
                 Image("memoryAsset2")
