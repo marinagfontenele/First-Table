@@ -56,16 +56,16 @@ struct CameraView: View {
                 )
             }
         }
-        .toolbar{
-            ToolbarItem(placement: .cancellationAction) {
-                Button {
-                    showAlert.toggle()
-                } label: {
-                    Image(systemName: "xmark")
-                }
-
-            }
-        }
+//        .toolbar{
+//            ToolbarItem(placement: .cancellationAction) {
+//                Button {
+//                    showAlert.toggle()
+//                } label: {
+//                    Image(systemName: "xmark")
+//                }
+//
+//            }
+//        }
         .alert("Tem certeza que deseja sair?", isPresented: $showAlert) {
             
             Button("Cancelar", role: .cancel) {}

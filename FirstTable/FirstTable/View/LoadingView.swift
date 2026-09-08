@@ -14,6 +14,7 @@ struct LoadingView: View {
     @State var modelService = FoundationModelsSession()
     @State private var currentQuestion: Int = 1
     @State var navigateToQuestions: Bool = false
+    @Bindable var photoSession: PhotoSession
     
     var body: some View {
         VStack {
@@ -27,7 +28,7 @@ struct LoadingView: View {
         .navigationBarBackButtonHidden(true)
         .background(Color.bgBlack.ignoresSafeArea())
         .navigationDestination(isPresented: $navigateToQuestions) {
-            QuestionView(totalQuestion: totalQuestion,modelService: modelService)
+            QuestionView(photoSession: photoSession, modelService: modelService)
         }
         .task {
             modelService.numberQuestions = totalQuestion
@@ -42,6 +43,6 @@ struct LoadingView: View {
     
 }
 
-#Preview {
-    LoadingView(totalQuestion: 5)
-}
+//#Preview {
+//    LoadingView(totalQuestion: 5)
+//}
