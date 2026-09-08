@@ -16,7 +16,7 @@ struct QuestionView: View {
     @Bindable var photoSession: PhotoSession
     @State private var showChallengeView: Bool = false
     @State private var showMemoryView: Bool = false
-    @State var modelService = FoundationModelsSession()
+    @Bindable var modelService: FoundationModelsSession
     
     var progress: CGFloat {
         guard photoSession.totalQuestions > 0 else { return 0 }
@@ -100,7 +100,7 @@ struct QuestionView: View {
                 onConfirm: {
                     showChallengeView = false
                 },
-                photoSession: photoSession
+                photoSession: photoSession, modelService: modelService
             )
         }
         .navigationDestination(isPresented: $showMemoryView){

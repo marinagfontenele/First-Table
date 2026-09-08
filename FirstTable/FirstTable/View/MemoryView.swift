@@ -24,7 +24,7 @@ struct MemoryFivePicturesView: View {
                     Image("memoryAsset1")
                         .offset(x: -152, y: -140)
                     Image("memoryAsset3")
-                        .offset(x: -115, y: 210)
+                        .offset(x: -115, y: 225)
                     
                     PolaroidFrameGroup(photo: photoSession.results[0])
                         .offset(x:-15, y: -200)
@@ -35,8 +35,8 @@ struct MemoryFivePicturesView: View {
                         .offset(x: 60, y: -25)
                         .rotationEffect(Angle(degrees: 5))
                     PolaroidFrameTextAtBottom(photo: photoSession.results[3])
-                        .offset(x: -110, y: 150)
-                        .rotationEffect(Angle(degrees: -10))
+                        .offset(x: -105, y: 150)
+                        .rotationEffect(Angle(degrees: -5))
                     PolaroidFrameTextAtBottom(photo: photoSession.results[4])
                         .offset(x: -70, y: -35)
                         .rotationEffect(Angle(degrees: -5))
@@ -44,7 +44,7 @@ struct MemoryFivePicturesView: View {
                     Image("memoryAsset2")
                         .offset(x: 100, y: 275)
                     Image("memorySmileFace")
-                        .offset(x: 100, y: -140)
+                        .offset(x: 100, y: -115)
                 }
                 .offset(x: 15, y: 20)
                 
@@ -73,7 +73,7 @@ struct MemoryThreePicturesView: View {
                     .offset(x: -75, y: -120)
                     .scaleEffect(x:-1)
                 Image("memoryAsset3")
-                    .offset(x:50, y: -250)
+                    .offset(x:50, y: -240)
                 
                 PolaroidFrameTextAtTop(photo: photoSession.results[1])
                     .offset(x:-40, y: -190)

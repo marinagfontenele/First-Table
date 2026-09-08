@@ -16,8 +16,6 @@ struct CategoryView: View {
     let groupName: String
     @Bindable var photoSession: PhotoSession
     
-    @State private var showQuestionView: Bool = false
-    
     var body: some View {
             ScrollView {
                 HStack {
@@ -77,9 +75,7 @@ struct CategoryView: View {
                             photoSession.start(totalQuestions: totalQuestion, firstTaskName: groupName)
                         }
                     }
-                    .navigationDestination(isPresented: $showQuestionView){
-                        QuestionView(photoSession: photoSession)
-                    }
+                    
                 }
             }
             .background(Color.bgBlack.ignoresSafeArea())
