@@ -23,9 +23,16 @@ struct ChallengeView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.top, 15)
                 .offset(x: 50)
-                
             
-            MainButtonView(title: "Fotografia\nRelâmpago")
+            
+            Text("Fotografia Relâmpago")
+                .font(.custom("Poppins-SemiBold", size: 24))
+                .foregroundStyle(.lemonGreen)
+                .frame(maxWidth: .infinity, minHeight: 56)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(.lemonGreen, lineWidth: 5)
+                )
                 .offset(y: -60)
                 .padding(.horizontal,30)
                 .multilineTextAlignment(.center)
