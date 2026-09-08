@@ -52,24 +52,26 @@ struct QuestionView: View {
             Spacer()
             
             ZStack{
-                OllieView(yEyes: 12)
-                    .offset(x:-100,y: -200)
-                    .scaleEffect(0.6)
-                
-                Text(modelService.questions[currentQuestion - 1].text)
+                Text(modelService.questions[photoSession.currentQuestion - 1].text)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
                     .padding(.top,50)
                     .font(.custom("Poppins-SemiBold", size: 23))
+                    .padding(.vertical)
                     .frame(minWidth:296, minHeight: 223 + 50)
                     .background(
                         SpeechBubble()
                             .fill(.darkPurple)
                     )
+                    .background(alignment: .topLeading){
+                        OllieView(yEyes: 12)
+                            .offset(x:-50,y: -100)
+                            .scaleEffect(0.6)
+                    }
                     .padding()
                     .overlay(alignment: .bottomTrailing){
                         Image("shoutingBalloon")
-                            .offset(y: 20)
+                            .offset(y: 30)
                     }
                     .padding(.bottom, 70)
                 
