@@ -49,11 +49,7 @@ struct PhotoConfirmationView: View {
             }
         }
         .navigationDestination(isPresented: $showMemoryView){
-            if photoSession.totalQuestions == 5 {
-                MemoryThreePicturesView(photoSession: photoSession)
-            } else {
-                MemoryFivePicturesView(photoSession: photoSession)
-            }
+            MemoryView(photoSession: photoSession)
         }
     }
     
