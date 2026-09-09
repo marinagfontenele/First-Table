@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct InformationsView: View {
+    @EnvironmentObject var navigation: NavigationManager
+    
     @State var groupName: String = ""
     @State var selectedRound: rounds? = nil
     @State var numberRounds: Int = 0
     @State private var showError = false
-    @State private var goToDescription = false
     
     @State private var totalQuestion: Int? = nil
     
@@ -94,6 +95,9 @@ struct InformationsView: View {
                         
                         Button {
                             validateAndContinue()
+                            navigation.totalQuestion = totalQuestion
+                            navigation.groupName = groupName
+                            navigation.navigate(to: .description)
                             } label: {
                                 
                                 MainButtonView(title: "Continuar")
@@ -116,14 +120,6 @@ struct InformationsView: View {
             .onTapGesture {
                 isNameFieldFocused = false
             }
-            .navigationDestination(isPresented: $goToDescription) {
-                if let totalQuestion {
-                    DescriptionView(
-                        totalQuestion: totalQuestion,
-                        groupName: groupName
-                    )
-                }
-            }
         
         .navigationTitle("Informações")
     }
@@ -142,7 +138,7 @@ struct InformationsView: View {
         } else {
             showError = false
             isNameFieldFocused = false
-            goToDescription = true }
+        }
         
     }
     

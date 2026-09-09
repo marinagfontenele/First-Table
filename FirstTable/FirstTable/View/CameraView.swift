@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct CameraView: View {
+    @EnvironmentObject var navigation: NavigationManager
+    
     @Environment(\.dismiss) var dismiss
     @State private var showAlert: Bool = false
     
     @State private var cameraService = CameraService()
     @State private var capturedImage: UIImage?
-    @State private var showConfirmation: Bool = false
-    
-    @Bindable var photoSession: PhotoSession
-    @Bindable var modelService: FoundationModelsSession
-    
-    let onConfirm: () -> Void
     
     var body: some View {
+        
+        let photoSession = navigation.photoSession
+        let modelService = navigation.modelService
+        
         VStack /*ZStack(alignment: .bottom)*/{
             CameraPreview(session: cameraService.session)
             
@@ -48,26 +48,6 @@ struct CameraView: View {
         
         .navigationTitle("Desafio")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationDestination(isPresented: $showConfirmation) {
-            if let capturedImage {
-                PhotoConfirmationView(
-                    image: capturedImage,
-                    onConfirm: onConfirm,
-                    photoSession: photoSession,
-                    modelService: modelService
-                )
-            }
-        }
-//        .toolbar{
-//            ToolbarItem(placement: .cancellationAction) {
-//                Button {
-//                    showAlert.toggle()
-//                } label: {
-//                    Image(systemName: "xmark")
-//                }
-//
-//            }
-//        }
         .alert("Tem certeza que deseja sair?", isPresented: $showAlert) {
             
             Button("Cancelar", role: .cancel) {}
@@ -92,7 +72,8 @@ struct CameraView: View {
                 
                 capturedImage = photo.uiImage
                 
-                showConfirmation.toggle()
+                navigation.capturedImage = capturedImage
+                navigation.navigate(to: .confirmation)
             } catch {
                 print("Erro ao tirar a foto: \(error)")
             }

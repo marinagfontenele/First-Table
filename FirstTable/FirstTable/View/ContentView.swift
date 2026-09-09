@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isPresented: Bool = false
+    @StateObject private var navigation = NavigationManager()
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigation.path) {
             ZStack{
                 GridBackground()
                 ScrollView {
@@ -52,7 +52,22 @@ struct ContentView: View {
                     .padding()
                 }
             }
-        }.navigationBarBackButtonHidden(true)
+            .navigationBarBackButtonHidden(true)
+            .navigationDestination(for: AppRoute.self) { route in
+                switch route {
+                case .information: InformationsView()
+                case .description: DescriptionView()
+                case .category: CategoryView()
+                case .loading: LoadingView()
+                case .challenge: ChallengeView()
+                case .camera: CameraView()
+                case .confirmation: PhotoConfirmationView()
+                case .question: QuestionView()
+                case .memory: MemoryView()
+                }
+            }
+        }
+        .environmentObject(navigation)
     }
 }
 
