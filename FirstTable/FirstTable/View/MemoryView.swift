@@ -10,6 +10,7 @@ import SwiftUI
 struct MemoryView: View {
     @EnvironmentObject var navigation: NavigationManager
     @State private var shareImage: ShareImage?
+    @State private var showAlert: Bool = false
     var body: some View {
         if let photoSession = navigation.photoSession{
             VStack{
@@ -23,6 +24,14 @@ struct MemoryView: View {
             .navigationTitle("Memória")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
+                ToolbarItem(placement: .cancellationAction) {
+                    Button {
+                        showAlert.toggle()
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         let image: UIImage?
@@ -42,6 +51,17 @@ struct MemoryView: View {
                     }
 
                 }
+            }
+            .navigationBarBackButtonHidden(true)
+            .alert("Tem certeza que deseja sair?", isPresented: $showAlert) {
+                
+                Button("Cancelar", role: .cancel) {}
+                Button("Sair", role: .destructive) {
+                    navigation.goHome()
+                }
+                      
+            } message: {
+            Text("As alterações feitas serão perdidas.")
             }
             .sheet(item: $shareImage) { item in
                 ShareSheet(items: [item.image])
