@@ -8,42 +8,44 @@
 import SwiftUI
 
 struct MemoryView: View {
-    @Bindable var photoSession: PhotoSession
+    @EnvironmentObject var navigation: NavigationManager
     @State private var shareImage: ShareImage?
     var body: some View {
-        VStack{
-            if photoSession.totalQuestions == 5 {
-                ThreePicturesTemplate(photoSession: photoSession)
-            } else {
-                FivePictureTemplate(photoSession: photoSession)
-            }
-        }
-        .background(Color.bgBlack.ignoresSafeArea())
-        .navigationTitle("Memória")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar{
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    let image: UIImage?
-                    if photoSession.totalQuestions == 5 {
-                        image = renderView {ThreePicturesTemplate(photoSession: photoSession)}
-                    } else {
-                        image = renderView {
-                            FivePictureTemplate(photoSession: photoSession)
-                        }
-                    }
-                    if let image {
-                        shareImage = ShareImage(image: image)
-                    }
-
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
+        if let photoSession = navigation.photoSession{
+            VStack{
+                if photoSession.totalQuestions == 5 {
+                    ThreePicturesTemplate(photoSession: photoSession)
+                } else {
+                    FivePictureTemplate(photoSession: photoSession)
                 }
-
             }
-        }
-        .sheet(item: $shareImage) { item in
-            ShareSheet(items: [item.image])
+            .background(Color.bgBlack.ignoresSafeArea())
+            .navigationTitle("Memória")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar{
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        let image: UIImage?
+                        if photoSession.totalQuestions == 5 {
+                            image = renderView {ThreePicturesTemplate(photoSession: photoSession)}
+                        } else {
+                            image = renderView {
+                                FivePictureTemplate(photoSession: photoSession)
+                            }
+                        }
+                        if let image {
+                            shareImage = ShareImage(image: image)
+                        }
+
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+
+                }
+            }
+            .sheet(item: $shareImage) { item in
+                ShareSheet(items: [item.image])
+            }
         }
     }
 }
