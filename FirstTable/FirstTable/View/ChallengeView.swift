@@ -10,6 +10,7 @@ import SwiftUI
 struct ChallengeView: View {
     @EnvironmentObject var navigation: NavigationManager
     @State private var scale = 0.4
+    @State private var showAlert: Bool = false
     
     var body: some View {
         if let photoSession = navigation.photoSession{
@@ -59,19 +60,39 @@ struct ChallengeView: View {
                 Button {
                     navigation.navigate(to: .camera)
                 } label: {
-                    Image(systemName: "camera.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 41, height: 33)
-                        .foregroundStyle(.black)
-                        .padding(.vertical, 14)
-                        .padding(.horizontal, 38)
-                        .background(Color(.lemonGreen).cornerRadius(20))
+                    Text("Fotografar")
+                        .font(.custom("Poppins-SemiBold", size: 24))
+                        .foregroundStyle(.darkGreen)
+                        .frame(maxWidth: .infinity, minHeight: 56)
+                        .background(.lemonGreen)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .padding(.vertical, 25)
                 }
             }
             .navigationTitle("Desafio")
             .padding(.horizontal, 40)
             .background(Color.bgBlack.ignoresSafeArea())
+            .navigationBarBackButtonHidden(true)
+            .toolbar{
+                ToolbarItem(placement: .cancellationAction) {
+                    Button {
+                        showAlert.toggle()
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+
+                }
+            }
+            .alert("Tem certeza que deseja sair?", isPresented: $showAlert) {
+                
+                Button("Cancelar", role: .cancel) {}
+                Button("Sair", role: .destructive) {
+                    navigation.goHome()
+                }
+                      
+            } message: {
+            Text("As alterações feitas serão perdidas.")
+            }
         }
 
     }
