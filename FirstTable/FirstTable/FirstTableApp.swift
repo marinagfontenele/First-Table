@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct FirstTableApp: App {
+    @AppStorage("isFirstLaunch") var isFirstLaunch = true
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if isFirstLaunch {
+                OnboardingView()
+            } else {
+                ContentView()
+            }
         }
     }
 }

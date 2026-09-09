@@ -8,98 +8,136 @@
 import SwiftUI
 
 struct QuestionView: View {
-    
-    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var navigation: NavigationManager
     @State private var showAlert: Bool = false
-    
     @State private var currentQuestion: Int = 1
-    @State private var totalQuestion: Int = 5
-    
     @State private var question: String = "Se voce dormisse e acordasse com o dobro da sua idade, o que iria fazer?"
     
     var body: some View {
-        VStack {
-            HStack {
-                ZStack(alignment: .topLeading){
-                    RoundedRectangle(cornerRadius: 50)
-                        .frame(width: 300, height: 5)
-                        .foregroundStyle(Color.secondary)
+        if let photoSession = navigation.photoSession,
+           let modelService = navigation.modelService{
+            VStack {
+                HStack {
+                    ZStack(alignment: .leading){
+                        
+                        RoundedRectangle(cornerRadius: 50)
+                            .frame(width: 280, height: 5)
+                            .foregroundStyle(Color.secondary)
+                        
+                        RoundedRectangle(cornerRadius: 50)
+                            .frame(
+                                width: 280*(CGFloat(photoSession.currentQuestion) / CGFloat(photoSession.totalQuestions)),
+                                height: 5
+                            )
+                            .foregroundStyle(Color.lemonGreen)
+                    }
                     
-                    RoundedRectangle(cornerRadius: 50)
-                        .frame(
-                            width: 300*CGFloat(currentQuestion)/CGFloat(totalQuestion),
-                            height: 5
-                        )
-                        .foregroundStyle(Color.lemonGreen)
+                    Spacer()
+                    
+                    Text("\(photoSession.currentQuestion)/\(photoSession.totalQuestions)")
                 }
+                .padding()
+                .padding(.horizontal,10)
                 
                 Spacer()
                 
-                Text("\(currentQuestion)/\(totalQuestion)")
-            }
-            .padding()
-            .padding(.horizontal,10)
-            
-            Spacer()
-             
-            Text(question)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 40)
-                .padding(.top,50)
-                .font(.custom("Poppins-SemiBold", size: 23))
-                .frame(minWidth:296, minHeight: 223 + 50)
-                .background(
-                    SpeechBubble()
-                        .fill(.darkPurple)
-                )
-                .padding()
-                .overlay(alignment: .bottomTrailing){
-                    Image("shoutingBalloon")
-                        .offset(y: 20)
+                ZStack{
+                    Text(modelService.questions[photoSession.currentQuestion - 1].text)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 40)
+                        .padding(.top,50)
+                        .font(.custom("Poppins-SemiBold", size: 23))
+                        .padding(.vertical)
+                        .frame(minWidth:296, minHeight: 223 + 50)
+                        .background(
+                            SpeechBubble()
+                                .fill(.darkPurple)
+                        )
+                        .background(alignment: .topLeading){
+                            OllieView(yEyes: 12)
+                                .offset(x:-50,y: -100)
+                                .scaleEffect(0.6)
+                        }
+                        .padding()
+                        .overlay(alignment: .bottomTrailing){
+                            Image("shoutingBalloon")
+                                .offset(y: 30)
+                        }
+                        .padding(.bottom, 70)
+                    
+    //                Button {
+    //                    for option in modelService.questions {
+    //                        print(option.text)
+    //                    }
+    //                } label: {
+    //                    ImgButton(imageName: "arrow.right").padding(.horizontal, 140).padding(10)
+    //                }
+    //
                 }
-                .padding(.bottom, 70)
-            
-             Spacer()
-            
-            Button {
-                goForward()
-            } label: {
-                ImgButton(imageName: "arrow.right").padding(.horizontal, 140).padding(10)
-            }
-        }
-        .navigationTitle("Perguntas")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar{
-            ToolbarItem(placement: .cancellationAction) {
-                Button {
-                    showAlert.toggle()
-                } label: {
-                    Image(systemName: "xmark")
+                    Spacer()
+                    
+                    Button {
+                        let questionJustFinished = photoSession.currentQuestion
+                        if photoSession.shouldTakePhoto(afterQuestion: questionJustFinished){
+                            photoSession.goToNextQuestion()
+                            navigation.navigate(to: .challenge)
+                            return
+                        }
+                        if questionJustFinished == photoSession.totalQuestions {
+                            navigation.navigate(to: .memory)
+                            return
+                        }
+                        
+                        photoSession.goToNextQuestion()
+                    } label: {
+                        ImgButton(imageName: "arrow.right").padding(.horizontal, 140).padding(10)
+                    }
                 }
+            .background(Color.bgBlack.ignoresSafeArea())
+            .navigationTitle("Perguntas")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar{
+                ToolbarItem(placement: .cancellationAction) {
+                    Button {
+                        showAlert.toggle()
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
 
+                }
+            }
+            .navigationBarBackButtonHidden(true)
+            .alert("Tem certeza que deseja sair?", isPresented: $showAlert) {
+                
+                Button("Cancelar", role: .cancel) {}
+                Button("Sair", role: .destructive) {
+                    navigation.goHome()
+                }
+                      
+            } message: {
+            Text("As alterações feitas serão perdidas.")
             }
         }
-        .alert("Tem certeza que deseja sair?", isPresented: $showAlert) {
-            
-            Button("Cancelar", role: .cancel) {}
-            Button("Sair", role: .destructive) {
-                dismiss()
-            }
-                  
-        } message: {
-        Text("As alterações feitas serão perdidas.")
         }
-    }
     
-    func goForward() {
-        if currentQuestion < totalQuestion {
-            currentQuestion += 1
-        }
-    }
+//    func goForward() {
+//        let questionJustFinished = photoSession.currentQuestion
+//        if photoSession.shouldTakePhoto(afterQuestion: questionJustFinished){
+//            photoSession.goToNextQuestion()
+//            navigation.navigate(to: .challenge)
+//            return
+//        }
+//        if questionJustFinished == photoSession.totalQuestions {
+//            navigation.navigate(to: .memory)
+//            return
+//        }
+//        
+//        photoSession.goToNextQuestion()
+//    }
 }
 
 
 
-#Preview {
-    QuestionView()
-}
+//#Preview {
+//    QuestionView(photoSession: photoSession)
+//}

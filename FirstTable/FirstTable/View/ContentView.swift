@@ -8,45 +8,66 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isPresented: Bool = false
+    @StateObject private var navigation = NavigationManager()
     
     var body: some View {
-        ScrollView {
-            VStack {
-                Spacer(minLength: 150)
-                
-                Text("Konver\nsácio")
-                    .font(Font.custom("Poppins-SemiBold", size: 60, relativeTo: .title))
-                
-                Spacer(minLength: 150)
-                
-                Button {
-                    InformationsView()
-                } label: {
-                    MainButtonView(title: "Iniciar")
+        NavigationStack(path: $navigation.path) {
+            ZStack{
+                GridBackground()
+                ScrollView {
+                    VStack {
+                        Spacer(minLength: 150)
+                        
+                        Image("logo")
+                            .offset(x:-20)
+                        
+                        Spacer(minLength: 75)
+                        
+                        NavigationLink {
+                            InformationsView()
+                        } label: {
+                            MainButtonView(title: "Iniciar")
+                        }
+                        .padding(.horizontal, 75)
+                        .padding(.vertical, 15)
+                        
+    //                    Button {
+    //
+    //                    } label: {
+    //                        MainButtonView(title: "Galeria")
+    //                    }
+    //                    .padding(.horizontal, 40)
+    //                    .padding(.vertical, 8)
+                        
+                        
+                        NavigationLink {
+                            TutorialView()
+                        } label: {
+                            MainButtonView(title: "Tutorial")
+                        }
+                        .padding(.horizontal, 75)
+                        
+                        Spacer()
+                    }
+                    .padding()
                 }
-                .padding(.horizontal, 40)
-                
-                Button {
-                    
-                } label: {
-                    MainButtonView(title: "Galeria")
-                }
-                .padding(.horizontal, 40)
-                .padding(.vertical, 8)
-                
-                
-                Button {
-                    
-                } label: {
-                    MainButtonView(title: "Tutorial")
-                }
-                .padding(.horizontal, 40)
-                
-                Spacer()
             }
-            .padding()
+            .navigationBarBackButtonHidden(true)
+            .navigationDestination(for: AppRoute.self) { route in
+                switch route {
+                case .information: InformationsView()
+                case .description: DescriptionView()
+                case .category: CategoryView()
+                case .loading: LoadingView()
+                case .challenge: ChallengeView()
+                case .camera: CameraView()
+                case .confirmation: PhotoConfirmationView()
+                case .question: QuestionView()
+                case .memory: MemoryView()
+                }
+            }
         }
+        .environmentObject(navigation)
     }
 }
 

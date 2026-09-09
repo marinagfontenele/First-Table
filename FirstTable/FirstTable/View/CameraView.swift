@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CameraView: View {
+    @EnvironmentObject var navigation: NavigationManager
+    
     @Environment(\.dismiss) var dismiss
     @State private var showAlert: Bool = false
     
@@ -15,39 +17,37 @@ struct CameraView: View {
     @State private var capturedImage: UIImage?
     
     var body: some View {
-        ZStack(alignment: .bottom){
+        
+        let photoSession = navigation.photoSession
+        let modelService = navigation.modelService
+        
+        VStack /*ZStack(alignment: .bottom)*/{
             CameraPreview(session: cameraService.session)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .padding()
-            
-            Button {
-                captureImage()
-            } label: {
-                ZStack {
-                    Circle()
-                        .fill(.gray.opacity(0.5))
-                        .frame(width: 90, height: 90)
-
-                    Circle()
-                        .fill(.white)
-                        .frame(width: 75, height: 75)
-                }
-                .padding(50)
-            }
             
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .aspectRatio(3.0 / 4.0, contentMode: .fit)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .padding(.horizontal)
+        
+        Button {
+            captureImage()
+        } label: {
+            ZStack {
+                Circle()
+                    .fill(.gray.opacity(0.5))
+                    .frame(width: 90, height: 90)
+
+                Circle()
+                    .fill(.white)
+                    .frame(width: 75, height: 75)
+            }
+            .padding(.top)
+        }
+        
+        
         .navigationTitle("Desafio")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar{
-            ToolbarItem(placement: .cancellationAction) {
-                Button {
-                    showAlert.toggle()
-                } label: {
-                    Image(systemName: "xmark")
-                }
-
-            }
-        }
         .alert("Tem certeza que deseja sair?", isPresented: $showAlert) {
             
             Button("Cancelar", role: .cancel) {}
@@ -61,15 +61,19 @@ struct CameraView: View {
         .task {
             await cameraService.prepare()
         }
+        
             
     }
     
     func captureImage() {
         Task {
             do {
-                let capturedImage2 = try await cameraService.capturePhoto()
+                let photo = try await cameraService.capturePhoto()
                 
-                capturedImage = capturedImage2.uiImage
+                capturedImage = photo.uiImage
+                
+                navigation.capturedImage = capturedImage
+                navigation.navigate(to: .confirmation)
             } catch {
                 print("Erro ao tirar a foto: \(error)")
             }
@@ -78,6 +82,6 @@ struct CameraView: View {
     
 }
 
-#Preview {
-    CameraView()
-}
+//#Preview {
+//    CameraView()
+//}
