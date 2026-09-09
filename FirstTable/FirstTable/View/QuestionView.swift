@@ -90,7 +90,14 @@ struct QuestionView: View {
                         
                         photoSession.goToNextQuestion()
                     } label: {
-                        ImgButton(imageName: "arrow.right").padding(.horizontal, 140).padding(10)
+                        Text("Continuar")
+                            .font(.custom("Poppins-SemiBold", size: 24))
+                            .foregroundStyle(.darkGreen)
+                            .frame(maxWidth: .infinity, minHeight: 56)
+                            .background(.lemonGreen)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .padding(.horizontal, 40)
+                            .padding(.vertical, 25)
                     }
                 }
             .background(Color.bgBlack.ignoresSafeArea())
