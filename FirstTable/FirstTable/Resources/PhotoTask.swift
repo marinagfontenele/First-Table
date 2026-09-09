@@ -101,7 +101,7 @@ extension PhotoTask {
         
         PhotoTask(
             name: "Nunca responde",
-            instruction: "Quem nunca responde mensagem na hora??"
+            instruction: "Quem nunca responde mensagem na hora?"
         ),
         
         PhotoTask(
