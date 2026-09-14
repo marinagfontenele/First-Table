@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FoundationModels
 
 @main
 struct FirstTableApp: App {
@@ -13,10 +14,18 @@ struct FirstTableApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if isFirstLaunch {
-                OnboardingView()
-            } else {
-                ContentView()
+            
+            switch SystemLanguageModel.default.availability {
+                
+            case .available:
+                if isFirstLaunch {
+                    OnboardingView()
+                } else {
+                    ContentView()
+                }
+                
+            case .unavailable:
+                FoudationModels()
             }
         }
     }

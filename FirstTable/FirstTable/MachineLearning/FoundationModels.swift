@@ -7,25 +7,46 @@
 
 import SwiftUI
 import FoundationModels
- 
+
 struct FoudationModels: View {
+    
+    var availabilityMessage: String {
+        switch SystemLanguageModel.default.availability {
+            
+        case .available:
+            return "O Foundation Models está disponível."
+            
+        case .unavailable(let reason):
+            
+            switch reason {
+                
+            case .appleIntelligenceNotEnabled:
+                return "O Apple Intelligence não está ativado. Ative-o em Ajustes."
+                
+            case .deviceNotEligible:
+                return "Este dispositivo não é compatível com o Apple Intelligence."
+                
+            case .modelNotReady:
+                return "O modelo de linguagem ainda não está pronto. Tente novamente mais tarde."
+                
+            @unknown default:
+                return "O modelo de linguagem não está disponível por um motivo desconhecido."
+            }
+        }
+    }
+    
     var body: some View {
         switch SystemLanguageModel.default.availability {
+            
         case .available:
             Text("The language model is available.")
                 .padding()
-        case .unavailable(let reason):
-            let text = switch reason {
-            case .appleIntelligenceNotEnabled:
-                "Apple Intelligence is not enabled. Please enable it in Settings."
-            case .deviceNotEligible:
-                "This device is not eligible for Apple Intelligence. Please use a compatible device."
-            case .modelNotReady:
-                "The language model is not ready yet. Please try again later."
-            @unknown default:
-                "The language model is unavailable for an unknown reason."
-            }
-            ContentUnavailableView(text, systemImage: "apple.intelligence.badge.xmark")
+            
+        case .unavailable:
+            ContentUnavailableView(
+                availabilityMessage,
+                systemImage: "apple.intelligence.badge.xmark"
+            )
         }
     }
 }
