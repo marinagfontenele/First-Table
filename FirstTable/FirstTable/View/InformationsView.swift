@@ -95,9 +95,6 @@ struct InformationsView: View {
                         
                         Button {
                             validateAndContinue()
-                            navigation.totalQuestion = totalQuestion
-                            navigation.groupName = groupName
-                            navigation.navigate(to: .description)
                             } label: {
                                 
                                 MainButtonView(title: "Continuar")
@@ -138,6 +135,9 @@ struct InformationsView: View {
         } else {
             showError = false
             isNameFieldFocused = false
+            navigation.totalQuestion = totalQuestion
+            navigation.groupName = groupName
+            navigation.navigate(to: .description)
         }
         
     }
