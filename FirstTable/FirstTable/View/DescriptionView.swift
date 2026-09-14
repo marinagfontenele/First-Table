@@ -74,8 +74,6 @@ struct DescriptionView: View {
                         
                         Button {
                             validateAndContinue()
-                            navigation.photoSession = photoSession
-                            navigation.navigate(to: .category)
 
                         } label: {
                             MainButtonView(title: "Continuar")
@@ -110,6 +108,8 @@ struct DescriptionView: View {
         } else {
             showError = false
             isDescriptionFocused = false
+            navigation.photoSession = photoSession
+            navigation.navigate(to: .category)
         }
     }
 }
