@@ -20,6 +20,7 @@ struct ContentView: View {
                         
                         Image("logo")
                             .offset(x:-20)
+                            .accessibilityHidden(true)
                         
                         Spacer(minLength: 75)
                         
@@ -57,6 +58,7 @@ struct ContentView: View {
                             
                             Image("logo")
                                 .offset(x:-20)
+                                .accessibilityHidden(true)
                             
                             Spacer(minLength: 75)
                             
