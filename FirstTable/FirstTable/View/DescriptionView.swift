@@ -25,6 +25,7 @@ struct DescriptionView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 20)
                             .padding(.vertical, 15)
+                            .accessibilityHidden(true)
                         
                         ZStack(alignment: .topLeading) {
                             
@@ -41,8 +42,8 @@ struct DescriptionView: View {
                                         RoundedRectangle(cornerRadius: 15)
                                             .stroke( showError ? .red : Color.lemonGreen, lineWidth: 2 )
                                     }
-                                
-                          
+                                    .accessibilityLabel(Text("Descreva seu grupo"))
+                                    .accessibilityHint(Text("As características vão influenciar algumas perguntas, então descrevam bem suas preferências"))
                                 
                                 if description.isEmpty {
                                     Text("Ex: “Nós somos estudantes, gostamos de jogar”")
@@ -51,6 +52,7 @@ struct DescriptionView: View {
                                         .padding(.horizontal, 20)
                                         .padding(.vertical, 21)
                                         .allowsHitTesting(false)
+                                        .accessibilityHidden(true)
                                 }
                             
                         }
@@ -61,6 +63,7 @@ struct DescriptionView: View {
                                     .foregroundStyle(.red)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.horizontal, 20)
+                                    .accessibilityLabel(Text("Escreva uma descrição para continuar"))
                             }
                         }
                         .padding(.top, 4)
@@ -71,6 +74,7 @@ struct DescriptionView: View {
                             .padding(.horizontal, 20)
                             .font(.custom("Poppins-SemiBold", size: 15))
                             .foregroundStyle(.gray)
+                            .accessibilityHidden(true)
                         
                         Button {
                             validateAndContinue()
@@ -88,6 +92,7 @@ struct DescriptionView: View {
                         OllieView(yEyes: 0.02)
                             .offset(y:100)
                             .scaleEffect(2)
+                            .accessibilityHidden(true)
                     }
                 }
             }
