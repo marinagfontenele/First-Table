@@ -30,8 +30,11 @@ struct InformationsView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.horizontal, 20)
                                     .padding(.vertical, 15)
+                                    .accessibilityHidden(true)
                                 
                                 TextField("Ex: Os Besties", text: $groupName)
+                                    .accessibilityElement(children: .ignore)
+                                    .accessibilityLabel("Digite o nome do grupo")
                                     .font(Font.custom("Poppins-SemiBold", size: 15))
                                     .foregroundStyle(.white)
                                     .padding(15)
@@ -52,6 +55,7 @@ struct InformationsView: View {
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .foregroundStyle(.red)
                                         .padding(.horizontal, 20)
+                                        .accessibilityLabel(Text("Digite um nome do grupo para continuar"))
                                 }
                             }
                             .padding(.bottom, 20)
@@ -60,11 +64,9 @@ struct InformationsView: View {
                             Text("Número de Perguntas")
                                 .font(Font.custom("Poppins-SemiBold", size: 20))
                                 .padding(.horizontal, 20)
-                            
+                                .accessibilityLabel("Escolha um número de perguntas")
                         }
-                            
                             VStack  {
-                                
                                 HStack {
                                     
                                     fiveButton
@@ -86,6 +88,7 @@ struct InformationsView: View {
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .foregroundStyle(.red)
                                         .padding(.horizontal, 20)
+                                        .accessibilityLabel(Text("Selecione uma qunatidade de perguntas para continuar"))
                                 }
                             }
                         
@@ -109,6 +112,7 @@ struct InformationsView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                             .offset(y:100)
                             .scaleEffect(2)
+                            .accessibilityHidden(true)
                     }
                 }
             }
@@ -156,6 +160,7 @@ struct InformationsView: View {
                         .foregroundStyle(.black)
                         .padding(.horizontal, 30)
                         .padding(.vertical, 25)
+                        .accessibilityLabel("selecionado")
                 }
                 .overlay {
                     RoundedRectangle(cornerRadius: 20, style: .continuous)
@@ -179,6 +184,7 @@ struct InformationsView: View {
                         .foregroundStyle(.white)
                         .padding(.horizontal, 30)
                         .padding(.vertical, 25)
+                        .accessibilityLabel("5 perguntas")
                 }
                 .overlay {
                     RoundedRectangle(cornerRadius: 20, style: .continuous)
@@ -207,7 +213,9 @@ struct InformationsView: View {
                         .foregroundStyle(.black)
                         .padding(.horizontal, 30)
                         .padding(.vertical, 25)
+                        .accessibilityLabel("selecionado")
                 }
+                
                 .overlay {
                     RoundedRectangle(cornerRadius: 20, style: .continuous)
                         .stroke(Color(.lemonGreen), lineWidth: 2)
@@ -229,6 +237,7 @@ struct InformationsView: View {
                         .foregroundStyle(.white)
                         .padding(.horizontal, 30)
                         .padding(.vertical, 25)
+                        .accessibilityLabel("10 perguntas")
                 }
                 .overlay {
                     RoundedRectangle(cornerRadius: 20, style: .continuous)
@@ -256,7 +265,9 @@ struct InformationsView: View {
                         .foregroundStyle(.black)
                         .padding(.horizontal, 30)
                         .padding(.vertical, 25)
+                        .accessibilityLabel("selecionado")
                 }
+                .accessibilityLabel("selecionado")
                 .overlay {
                     RoundedRectangle(cornerRadius: 20, style: .continuous)
                         .stroke(Color(.lemonGreen), lineWidth: 2)
@@ -279,6 +290,7 @@ struct InformationsView: View {
                         .foregroundStyle(.white)
                         .padding(.horizontal, 30)
                         .padding(.vertical, 25)
+                        .accessibilityLabel("15 perguntas")
                 }
                 .overlay {
                     RoundedRectangle(cornerRadius: 20, style: .continuous)
