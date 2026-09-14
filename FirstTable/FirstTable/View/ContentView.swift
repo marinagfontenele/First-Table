@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var navigation = NavigationManager()
+    @State private var isFloating = false
     
     var body: some View {
         NavigationStack(path: $navigation.path) {
@@ -18,10 +19,36 @@ struct ContentView: View {
                     VStack {
                         Spacer(minLength: 150)
                         
-                        Image("logo")
-                            .offset(x:-20)
-                        
+                        ZStack{
+                            
+                            Image("pupleStar")
+                                .resizable()
+                                .frame(width: 190, height: 190)
+                                .offset(x: -135, y: isFloating ? -35 : -25)
+                            
+                            Image("kovensatioLogo")
+                                .offset(x: 5)
+                            
+                            Image("baloon")
+                                .resizable()
+                                .frame(width: 80, height: 80)
+                                .offset(x: 110, y: isFloating ? 45 : 55)
+                            
+                            Image("wave")
+                                .resizable()
+                                .frame(width: 120, height: 100)
+                                .offset(x: 125, y: isFloating ? -120 : -110)
+                        }
+                        .onAppear {
+                            withAnimation(
+                                .easeInOut(duration: 2)
+                                .repeatForever(autoreverses: true)
+                            ) {
+                                isFloating = true
+                            }
+                        }
                         Spacer(minLength: 75)
+                            
                         
                         NavigationLink {
                             InformationsView()
@@ -55,8 +82,28 @@ struct ContentView: View {
                         VStack {
                             Spacer(minLength: 150)
                             
-                            Image("logo")
-                                .offset(x:-20)
+                            ZStack{
+                                
+                                Image("pupleStar")
+                                    .resizable()
+                                    .frame(width: 190, height: 190)
+                                    .offset(x: -135, y: -30)
+
+                                
+                                Image("kovensatioLogo")
+                                    .offset(x: 5)
+                                
+                                Image("baloon")
+                                    .resizable()
+                                    .frame(width: 80, height: 80)
+                                    .offset(x: 110, y: 50)
+                                
+                                Image("wave")
+                                    .resizable()
+                                    .frame(width: 120, height: 100)
+                                    .offset(x: 125, y: -115)
+                                
+                            }
                             
                             Spacer(minLength: 75)
                             
