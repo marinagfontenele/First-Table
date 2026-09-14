@@ -117,33 +117,52 @@ class CameraService: NSObject, @unchecked Sendable {
     }
     
     func capturePhoto() async throws -> CapturedImage {
-        try await withCheckedThrowingContinuation { continuation in
+        if let connection = photoOutput.connection(with: .video),
+           connection.isVideoMirroringSupported {
+
+            connection.automaticallyAdjustsVideoMirroring = false
+            connection.isVideoMirrored = false
+        }
+
+        return try await withCheckedThrowingContinuation { continuation in
             self.continuation = continuation
-            photoOutput.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
+
+            photoOutput.capturePhoto(
+                with: AVCapturePhotoSettings(),
+                delegate: self
+            )
         }
     }
 }
 
 extension CameraService: AVCapturePhotoCaptureDelegate {
+
     func photoOutput(
         _ output: AVCapturePhotoOutput,
         didFinishProcessingPhoto photo: AVCapturePhoto,
         error: Error?
     ) {
+
         defer { continuation = nil }
+
         if let error {
             continuation?.resume(throwing: error)
+
         } else if let data = photo.fileDataRepresentation(),
                   let image = UIImage(data: data),
                   let cgImage = image.cgImage {
+
             continuation?.resume(
                 returning: CapturedImage(
                     cgImage: cgImage,
                     orientation: image.imageOrientation.cgImagePropertyOrientation
                 )
             )
+
         } else {
-            continuation?.resume(throwing: CameraError.captureFailed)
+            continuation?.resume(
+                throwing: CameraError.captureFailed
+            )
         }
     }
 }

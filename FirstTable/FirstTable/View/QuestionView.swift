@@ -41,29 +41,62 @@ struct QuestionView: View {
                 
                 Spacer()
                 
-                ZStack{
-                    Text(modelService.questions[photoSession.currentQuestion - 1].text)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 40)
-                        .padding(.top,50)
-                        .font(.custom("Poppins-SemiBold", size: 23))
-                        .padding(.vertical)
-                        .frame(minWidth:296, minHeight: 223 + 50)
-                        .background(
+                if modelService.questions[photoSession.currentQuestion - 1].text.count < 200 {
+                        Text(modelService.questions[photoSession.currentQuestion - 1].text)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 40)
+                            .padding(.top,50)
+                            .font(.custom("Poppins-SemiBold", size: 23))
+                            .padding(.vertical)
+                            .frame(minWidth:296, minHeight: 223 + 50)
+                            .background(
+                                SpeechBubble()
+                                    .fill(.darkPurple)
+                            )
+                            .background(alignment: .topLeading){
+                                OllieView(yEyes: 12)
+                                    .offset(x:-50,y: -100)
+                                    .scaleEffect(0.6)
+                            }
+                            .padding()
+                            .overlay(alignment: .bottomTrailing){
+                                Image("shoutingBalloon")
+                                    .offset(y: 30)
+                            }
+                            .padding(.bottom, 70)
+                    } else {
+                        ZStack{
                             SpeechBubble()
                                 .fill(.darkPurple)
-                        )
-                        .background(alignment: .topLeading){
-                            OllieView(yEyes: 12)
-                                .offset(x:-50,y: -100)
-                                .scaleEffect(0.6)
-                        }
-                        .padding()
-                        .overlay(alignment: .bottomTrailing){
-                            Image("shoutingBalloon")
-                                .offset(y: 30)
+                                .frame(minWidth: 296, minHeight: 325)
+                                .background(
+                                    SpeechBubble()
+                                        .fill(.darkPurple)
+                                )
+                                .background(alignment: .topLeading){
+                                    OllieView(yEyes: 12)
+                                        .offset(x:-50,y: -100)
+                                        .scaleEffect(0.6)
+                                }
+                                .padding()
+                            
+                            ScrollView(.vertical){
+                                Text(modelService.questions[photoSession.currentQuestion - 1].text)
+                            }
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 40)
+                            .padding(.top,60)
+                            .font(.custom("Poppins-SemiBold", size: 23))
+                            .padding(.vertical)
+                            .frame(minWidth:296, minHeight: 223 + 50)
+                            .padding(.horizontal)
+                            .overlay(alignment: .bottomTrailing){
+                                Image("shoutingBalloon")
+                                    .offset(y: 30)
+                            }
                         }
                         .padding(.bottom, 70)
+                }
                     
     //                Button {
     //                    for option in modelService.questions {
@@ -72,8 +105,7 @@ struct QuestionView: View {
     //                } label: {
     //                    ImgButton(imageName: "arrow.right").padding(.horizontal, 140).padding(10)
     //                }
-    //
-                }
+                
                     Spacer()
                     
                     Button {

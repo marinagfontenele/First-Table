@@ -18,7 +18,7 @@ struct DescriptionView: View {
     
     var body: some View {
             ScrollView {
-                if let totalQuestion = navigation.totalQuestion, let groupName = navigation.groupName{
+                if let totalQuestion = navigation.totalQuestion{
                     VStack {
                         Text("Descreva seu grupo")
                             .font(.custom("Poppins-SemiBold", size: 20))
@@ -113,6 +113,7 @@ struct DescriptionView: View {
         } else {
             showError = false
             isDescriptionFocused = false
+            navigation.groupDescription = description
             navigation.photoSession = photoSession
             navigation.navigate(to: .category)
         }
