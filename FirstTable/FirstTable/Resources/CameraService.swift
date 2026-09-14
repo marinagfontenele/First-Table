@@ -117,6 +117,7 @@ class CameraService: NSObject, @unchecked Sendable {
     }
     
     func capturePhoto() async throws -> CapturedImage {
+
         if let connection = photoOutput.connection(with: .video),
            connection.isVideoMirroringSupported {
 
@@ -147,23 +148,41 @@ extension CameraService: AVCapturePhotoCaptureDelegate {
 
         if let error {
             continuation?.resume(throwing: error)
+            return
+        }
 
-        } else if let data = photo.fileDataRepresentation(),
-                  let image = UIImage(data: data),
-                  let cgImage = image.cgImage {
+        guard let data = photo.fileDataRepresentation(),
+              let originalImage = UIImage(data: data) else {
 
-            continuation?.resume(
-                returning: CapturedImage(
-                    cgImage: cgImage,
-                    orientation: image.imageOrientation.cgImagePropertyOrientation
-                )
-            )
-
-        } else {
             continuation?.resume(
                 throwing: CameraError.captureFailed
             )
+
+            return
         }
+
+        let finalImage: UIImage
+
+        if cameraPosition == .front {
+            finalImage = originalImage.horizontallyFlipped()
+        } else {
+            finalImage = originalImage
+        }
+
+        guard let cgImage = finalImage.cgImage else {
+            continuation?.resume(
+                throwing: CameraError.captureFailed
+            )
+
+            return
+        }
+
+        continuation?.resume(
+            returning: CapturedImage(
+                cgImage: cgImage,
+                orientation: finalImage.imageOrientation.cgImagePropertyOrientation
+            )
+        )
     }
 }
 
@@ -199,6 +218,53 @@ extension UIImage.Orientation {
         case .leftMirrored: .leftMirrored
         case .rightMirrored: .rightMirrored
         case .right: .right
+        }
+    }
+}
+
+private extension UIImage.Orientation {
+    var withoutMirroring: UIImage.Orientation {
+        switch self {
+        case .upMirrored:
+            return .up
+
+        case .downMirrored:
+            return .down
+
+        case .leftMirrored:
+            return .left
+
+        case .rightMirrored:
+            return .right
+
+        default:
+            return self
+        }
+    }
+}
+
+extension UIImage {
+    func horizontallyFlipped() -> UIImage {
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = self.scale
+
+        let renderer = UIGraphicsImageRenderer(
+            size: self.size,
+            format: format
+        )
+
+        return renderer.image { context in
+            let cgContext = context.cgContext
+
+            cgContext.translateBy(x: self.size.width, y: 0)
+            cgContext.scaleBy(x: -1, y: 1)
+
+            self.draw(
+                in: CGRect(
+                    origin: .zero,
+                    size: self.size
+                )
+            )
         }
     }
 }
