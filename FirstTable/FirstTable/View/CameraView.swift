@@ -42,6 +42,7 @@ struct CameraView: View {
                     .fill(.white)
                     .frame(width: 75, height: 75)
             }
+            .accessibilityLabel(Text("Tirar foto"))
             .padding(.top)
         }
         
