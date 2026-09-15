@@ -25,6 +25,7 @@ struct LoadingView: View {
                         .scaleEffect(2)
                         .tint(.lemonGreen)
                         .padding()
+                        .accessibilityHidden(true)
                     
                     Text("Formulando\nPerguntas")
                         .font(Font.custom("Poppins-SemiBold", size: 32))
