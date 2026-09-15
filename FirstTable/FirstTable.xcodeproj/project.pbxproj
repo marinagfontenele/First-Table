@@ -100,11 +100,11 @@
 				};
 			};
 			buildConfigurationList = EE0E138130405C1B008B1EC4 /* Build configuration list for PBXProject "FirstTable" */;
-			developmentRegion = en;
+			developmentRegion = "pt-BR";
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = EE0E137D30405C1B008B1EC4;
 			minimizedProjectReferenceProxies = 1;
