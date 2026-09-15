@@ -30,21 +30,37 @@ struct CameraView: View {
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .padding(.horizontal)
         
-        Button {
-            captureImage()
-        } label: {
-            ZStack {
-                Circle()
-                    .fill(.gray.opacity(0.5))
-                    .frame(width: 90, height: 90)
+        HStack{
+            Color.clear.frame(width: 50, height: 50)
+            Spacer()
+            Button {
+                captureImage()
+            } label: {
+                ZStack {
+                    Circle()
+                        .fill(.gray.opacity(0.5))
+                        .frame(width: 90, height: 90)
 
-                Circle()
-                    .fill(.white)
-                    .frame(width: 75, height: 75)
+                    Circle()
+                        .fill(.white)
+                        .frame(width: 75, height: 75)
+                }
+                .padding(.top)
             }
-            .accessibilityLabel(Text("Tirar foto"))
-            .padding(.top)
+            
+            Spacer()
+            
+            Button {
+                cameraService.switchCamera()
+            } label: {
+                Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90")
+                    .font(.system(size: 26))
+                    .foregroundStyle(.white)
+                    .frame(width: 50, height: 50)
+                    .background(Circle().fill(.gray.opacity(0.5)))
+            }
         }
+        .padding()
         
         
         .navigationTitle("Desafio")
