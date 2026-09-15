@@ -18,6 +18,8 @@ class NavigationManager: ObservableObject {
     //information
     @Published var totalQuestion: Int? = nil
     @Published var groupName: String? = nil
+    @Published var groupDescription : String? = nil
+    @Published var categories: [Category]? = nil
     
     //description
     @Published var photoSession: PhotoSession? = nil

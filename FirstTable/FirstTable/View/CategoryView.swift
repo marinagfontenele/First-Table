@@ -63,6 +63,7 @@ struct CategoryView: View {
                             .padding(.horizontal, 16)
                             
                             Button {
+                                navigation.categories = categories
                                 navigation.navigate(to: .loading)
                             } label: {
                                 MainButtonView(title: "Continuar")
