@@ -14,66 +14,61 @@ struct FoundationIncompatibilityView: View {
                 Spacer()
                 
                 Image("errorImage")
+                    .scaledToFit()
                 
-                Text("Ative a Apple Intelligence!")
+                Text("Ops, recurso indisponível!")
                     .font(.custom("Poppins-Bold", size: 24))
                     .padding()
                 
-                Text("1. Abra os Ajustes do iPhone  Vá em Ajustes > Apple Intelligence e Siri.")
+                Text("Seu aparelho não é compatível com a Apple Intelligence — não é possível continuar.")
                     .font(.custom("Poppins-Medium", size: 16))
-                    .padding()
-                
-                Text("2. Ative a Apple Intelligence  Toque no botão ao lado de ''Apple Intelligence''.")
-                    .font(.custom("Poppins-Medium", size: 16))
-                    .padding()
-                
-                Text("3. Feche e abra o aplicativo novamente\nFeche o aplicativo completamente e abra de novo para o recurso funcionar.")
-                    .font(.custom("Poppins-Medium", size: 16))
-                    .padding()
+                    .padding(.bottom)
+                    .padding(.horizontal)
                 
                 Spacer()
                 
-                Image("sadOllie")
+                Image("cryingOllie")
                     .padding(.bottom, -270)
+                    .scaledToFit()
             }
-            .background(Color.bgBlack.ignoresSafeArea())
+            .padding(.horizontal, 27)
+            .background(Color.bgBlack.ignoresSafeArea(edges: .all))
             .multilineTextAlignment(.center)
             
             ScrollView (showsIndicators: false){
                 VStack {
-                    Spacer()
+                    Spacer(minLength: 30)
                     
                     Image("errorImage")
+                        .scaledToFit()
                     
-                    Text("Ative a Apple Intelligence!")
+                    Text("Ops, recurso indisponível!")
                         .font(.custom("Poppins-Bold", size: 24))
                         .padding()
                     
-                    Text("1. Abra os Ajustes do iPhone  Vá em Ajustes > Apple Intelligence e Siri.")
+                    Text("Seu aparelho não é compatível com a Apple Intelligence — não é possível continuar.")
                         .font(.custom("Poppins-Medium", size: 16))
-                        .padding()
+                        .padding(.bottom)
+                        .padding(.horizontal)
                     
-                    Text("2. Ative a Apple Intelligence  Toque no botão ao lado de ''Apple Intelligence''.")
-                        .font(.custom("Poppins-Medium", size: 16))
-                        .padding()
+                    Spacer(minLength: 30)
                     
-                    Text("3. Feche e abra o aplicativo novamente\nFeche o aplicativo completamente e abra de novo para o recurso funcionar.")
-                        .font(.custom("Poppins-Medium", size: 16))
-                        .padding()
-                    
-                    Spacer()
-                    
-                    Image("sadOllie")
+                    Image("cryingOllie")
                         .padding(.bottom, -270)
+                        .scaledToFit()
                 }
+                .frame(minWidth: 400, maxWidth: 700)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
+                .padding(.horizontal, 30)
             }
-            .background(Color.bgBlack.ignoresSafeArea())
+            .padding(.horizontal)
         }
+        .background(Color.bgBlack.ignoresSafeArea(edges: .all))
     }
 }
 
 #Preview {
     FoundationIncompatibilityView()
 }
+
