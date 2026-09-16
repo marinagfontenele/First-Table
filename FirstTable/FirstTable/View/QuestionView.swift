@@ -41,31 +41,29 @@ struct QuestionView: View {
                 
                 Spacer()
                 
-                ViewThatFits {
-                    VStack{
-                        Text(modelService.questions[photoSession.currentQuestion - 1].text)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 40)
-                            .padding(.top,50)
-                            .font(.custom("Poppins-SemiBold", size: 23))
-                            .padding(.vertical)
-                            .frame(minWidth:296, minHeight: 223 + 50)
-                            .background(
-                                SpeechBubble()
-                                    .fill(.darkPurple)
-                            )
-                            .background(alignment: .topLeading){
-                                OllieView(yEyes: 12)
-                                    .offset(x:-50,y: -100)
-                                    .scaleEffect(0.6)
-                            }
-                            .padding()
-                            .overlay(alignment: .bottomTrailing){
-                                Image("shoutingBalloon")
-                                    .offset(y: 30)
-                            }
-                            .padding(.bottom, 70)
-                    }
+                ViewThatFits (in:.vertical){
+                    Text(modelService.questions[photoSession.currentQuestion - 1].text)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 40)
+                        .padding(.top,50)
+                        .font(.custom("Poppins-SemiBold", size: 23))
+                        .padding(.vertical)
+                        .frame(minWidth:296, minHeight: 223 + 50)
+                        .background(
+                            SpeechBubble()
+                                .fill(.darkPurple)
+                        )
+                        .background(alignment: .topLeading){
+                            OllieView(yEyes: 12)
+                                .offset(x:-50,y: -100)
+                                .scaleEffect(0.6)
+                        }
+                        .padding()
+                        .overlay(alignment: .bottomTrailing){
+                            Image("shoutingBalloon")
+                                .offset(y: 30)
+                        }
+                        .padding(.bottom, 70)
                     
                     ZStack{
                         SpeechBubble()
@@ -99,6 +97,7 @@ struct QuestionView: View {
                     }
                     .padding(.bottom, 70)
                 }
+                .frame(height: 420)
 //                if modelService.questions[photoSession.currentQuestion - 1].text.count < 200 {
 //                        Text(modelService.questions[photoSession.currentQuestion - 1].text)
 //                            .multilineTextAlignment(.center)
