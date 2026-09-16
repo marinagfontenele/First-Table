@@ -14,17 +14,9 @@ struct FirstTableApp: App {
     
     var body: some Scene {
         WindowGroup {
-            
-            switch SystemLanguageModel.default.availability {
-                
-            case .available:
-                if isFirstLaunch {
-                    OnboardingView()
-                } else {
-                    ContentView()
-                }
-                
-            case .unavailable:
+            if isFirstLaunch {
+                OnboardingView()
+            } else {
                 FoudationModels()
             }
         }

@@ -1,13 +1,13 @@
 //
-//  FoundationIncompatibilityView.swift
+//  FoundationNotReadyView.swift
 //  FirstTable
 //
-//  Created by Marina Gomes Fontenele on 15/09/26.
+//  Created by Marina Gomes Fontenele on 16/09/26.
 //
 
 import SwiftUI
 
-struct FoundationIncompatibilityView: View {
+struct FoundationNotReadyView: View {
     var body: some View {
         ViewThatFits (in: .vertical) {
             VStack {
@@ -16,18 +16,18 @@ struct FoundationIncompatibilityView: View {
                 Image("errorImage")
                     .scaledToFit()
                 
-                Text("Ops, recurso indisponível!")
+                Text("A integração com a Apple Intelligence ainda está em andamento!")
                     .font(.custom("Poppins-Bold", size: 24))
                     .padding()
                 
-                Text("Seu aparelho não é compatível com a Apple Intelligence — não é possível continuar.")
+                Text("Aguarde alguns instantes e reinicie o aplicativo.")
                     .font(.custom("Poppins-Medium", size: 16))
                     .padding(.bottom)
                     .padding(.horizontal)
                 
                 Spacer()
                 
-                Image("cryingOllie")
+                Image("sadOllie")
                     .padding(.bottom, -270)
                     .scaledToFit()
             }
@@ -42,18 +42,18 @@ struct FoundationIncompatibilityView: View {
                     Image("errorImage")
                         .scaledToFit()
                     
-                    Text("Ops, recurso indisponível!")
+                    Text("A integração com a Apple Intelligence ainda está em andamento!")
                         .font(.custom("Poppins-Bold", size: 24))
                         .padding()
                     
-                    Text("Seu aparelho não é compatível com a Apple Intelligence — não é possível continuar.")
+                    Text("Aguarde alguns instantes e reinicie o aplicativo.")
                         .font(.custom("Poppins-Medium", size: 16))
                         .padding(.bottom)
                         .padding(.horizontal)
                     
                     Spacer(minLength: 30)
                     
-                    Image("cryingOllie")
+                    Image("sadOllie")
                         .padding(.bottom, -270)
                         .scaledToFit()
                 }
@@ -69,6 +69,6 @@ struct FoundationIncompatibilityView: View {
 }
 
 #Preview {
-    FoundationIncompatibilityView()
+    FoundationNotReadyView()
 }
 

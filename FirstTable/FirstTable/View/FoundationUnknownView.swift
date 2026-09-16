@@ -1,13 +1,13 @@
 //
-//  FoundationIncompatibilityView.swift
+//  FoundationUnknowView.swift
 //  FirstTable
 //
-//  Created by Marina Gomes Fontenele on 15/09/26.
+//  Created by Marina Gomes Fontenele on 16/09/26.
 //
 
 import SwiftUI
 
-struct FoundationIncompatibilityView: View {
+struct FoundationUnknowView: View {
     var body: some View {
         ViewThatFits (in: .vertical) {
             VStack {
@@ -16,11 +16,11 @@ struct FoundationIncompatibilityView: View {
                 Image("errorImage")
                     .scaledToFit()
                 
-                Text("Ops, recurso indisponível!")
+                Text("Ocorreu um erro inesperado com a Apple Intelligence")
                     .font(.custom("Poppins-Bold", size: 24))
                     .padding()
                 
-                Text("Seu aparelho não é compatível com a Apple Intelligence — não é possível continuar.")
+                Text("Aguarde alguns instantes e tente novamente depois.")
                     .font(.custom("Poppins-Medium", size: 16))
                     .padding(.bottom)
                     .padding(.horizontal)
@@ -42,11 +42,11 @@ struct FoundationIncompatibilityView: View {
                     Image("errorImage")
                         .scaledToFit()
                     
-                    Text("Ops, recurso indisponível!")
+                    Text("Ocorreu um erro inesperado com a Apple Intelligence")
                         .font(.custom("Poppins-Bold", size: 24))
                         .padding()
                     
-                    Text("Seu aparelho não é compatível com a Apple Intelligence — não é possível continuar.")
+                    Text("Aguarde alguns instantes e tente novamente depois.")
                         .font(.custom("Poppins-Medium", size: 16))
                         .padding(.bottom)
                         .padding(.horizontal)
@@ -69,6 +69,6 @@ struct FoundationIncompatibilityView: View {
 }
 
 #Preview {
-    FoundationIncompatibilityView()
+    FoundationUnknowView()
 }
 
