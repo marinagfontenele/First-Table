@@ -70,10 +70,9 @@ struct CategoryButtonView: View {
                         Text("\(category.name)")
                             .font(Font.custom("Poppins-SemiBold", size: 13))
                             .foregroundStyle(.white)
-                            .padding(.horizontal, 15)
+                            .padding(.horizontal, 12)
                             .padding(.bottom, 10)
                             .padding(.top, 5)
-                        
                     }
                 }
                 .frame(maxWidth: 130, minHeight: 109)

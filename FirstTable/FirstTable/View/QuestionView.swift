@@ -16,64 +16,94 @@ struct QuestionView: View {
     var body: some View {
         if let photoSession = navigation.photoSession,
            let modelService = navigation.modelService{
-            VStack {
-                HStack {
-                    ZStack(alignment: .leading){
+            if modelService.questions.isEmpty {
+                FoundationQuestionErrorView()
+            } else {
+                VStack {
+                    HStack {
+                        ZStack(alignment: .leading){
+                            
+                            RoundedRectangle(cornerRadius: 50)
+                                .frame(width: 280, height: 5)
+                                .foregroundStyle(Color.secondary)
+                            
+                            RoundedRectangle(cornerRadius: 50)
+                                .frame(
+                                    width: 280*(CGFloat(photoSession.currentQuestion) / CGFloat(photoSession.totalQuestions)),
+                                    height: 5
+                                )
+                                .foregroundStyle(Color.lemonGreen)
+                        }
                         
-                        RoundedRectangle(cornerRadius: 50)
-                            .frame(width: 280, height: 5)
-                            .foregroundStyle(Color.secondary)
+                        Spacer()
                         
-                        RoundedRectangle(cornerRadius: 50)
-                            .frame(
-                                width: 280*(CGFloat(photoSession.currentQuestion) / CGFloat(photoSession.totalQuestions)),
-                                height: 5
-                            )
-                            .foregroundStyle(Color.lemonGreen)
+                        Text("\(photoSession.currentQuestion)/\(photoSession.totalQuestions)")
                     }
+                    .padding()
+                    .padding(.horizontal,10)
                     
                     Spacer()
                     
-                    Text("\(photoSession.currentQuestion)/\(photoSession.totalQuestions)")
-                }
-                .padding()
-                .padding(.horizontal,10)
-                
-                Spacer()
-                
-                ZStack{
-                    Text(modelService.questions[photoSession.currentQuestion - 1].text)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 40)
-                        .padding(.top,50)
-                        .font(.custom("Poppins-SemiBold", size: 23))
-                        .padding(.vertical)
-                        .frame(minWidth:296, minHeight: 223 + 50)
-                        .background(
+                    ViewThatFits (in:.vertical){
+                        Text(modelService.questions[photoSession.currentQuestion - 1].text)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 40)
+                            .padding(.top,50)
+                            .font(.custom("Poppins-SemiBold", size: 23))
+                            .padding(.vertical)
+                            .frame(minWidth:296, minHeight: 223 + 50)
+                            .background(
+                                SpeechBubble()
+                                    .fill(.darkPurple)
+                            )
+                            .background(alignment: .topLeading){
+                                OllieView(yEyes: 12)
+                                    .offset(x:-50,y: -100)
+                                    .scaleEffect(0.6)
+                            }
+                            .padding()
+                            .overlay(alignment: .bottomTrailing){
+                                Image("shoutingBalloon")
+                                    .offset(y: 30)
+                            }
+                            .padding(.bottom, 70)
+                        
+                        ZStack{
                             SpeechBubble()
                                 .fill(.darkPurple)
-                        )
-                        .background(alignment: .topLeading){
-                            OllieView(yEyes: 12)
-                                .offset(x:-50,y: -100)
-                                .scaleEffect(0.6)
-                        }
-                        .padding()
-                        .overlay(alignment: .bottomTrailing){
-                            Image("shoutingBalloon")
-                                .offset(y: 30)
+                                .frame(minWidth: 296, minHeight: 325)
+                                .background(
+                                    SpeechBubble()
+                                        .fill(.darkPurple)
+                                )
+                                .background(alignment: .topLeading){
+                                    OllieView(yEyes: 12)
+                                        .offset(x:-50,y: -100)
+                                        .scaleEffect(0.6)
+                                }
+                                .padding()
+                            
+                            ScrollView(.vertical, showsIndicators: false){
+                                Text(modelService.questions[photoSession.currentQuestion - 1].text)
+                                    .padding(.vertical, 10)
+                                    .padding(.bottom, 10)
+                            }
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 20)
+                            .padding(.top,60)
+                            .font(.custom("Poppins-SemiBold", size: 23))
+                            .padding(.vertical)
+                            .frame(minWidth:296, minHeight: 223 + 50)
+                            .padding(.horizontal)
+                            .overlay(alignment: .bottomTrailing){
+                                Image("shoutingBalloon")
+                                    .offset(y: 30)
+                            }
                         }
                         .padding(.bottom, 70)
+                    }
+                    .frame(height: 420)
                     
-    //                Button {
-    //                    for option in modelService.questions {
-    //                        print(option.text)
-    //                    }
-    //                } label: {
-    //                    ImgButton(imageName: "arrow.right").padding(.horizontal, 140).padding(10)
-    //                }
-    //
-                }
                     Spacer()
                     
                     Button {
@@ -90,53 +120,43 @@ struct QuestionView: View {
                         
                         photoSession.goToNextQuestion()
                     } label: {
-                        ImgButton(imageName: "arrow.right").padding(.horizontal, 140).padding(10)
+                        Text("Continuar")
+                            .font(.custom("Poppins-SemiBold", size: 24))
+                            .foregroundStyle(.darkGreen)
+                            .frame(maxWidth: .infinity, minHeight: 56)
+                            .background(.lemonGreen)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .padding(.horizontal, 40)
+                            .padding(.vertical, 25)
                     }
                 }
-            .background(Color.bgBlack.ignoresSafeArea())
-            .navigationTitle("Perguntas")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar{
-                ToolbarItem(placement: .cancellationAction) {
-                    Button {
-                        showAlert.toggle()
-                    } label: {
-                        Image(systemName: "xmark")
+                .background(Color.bgBlack.ignoresSafeArea())
+                .navigationTitle("Perguntas")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar{
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button {
+                            showAlert.toggle()
+                        } label: {
+                            Image(systemName: "xmark")
+                        }
                     }
-
+                }
+                .navigationBarBackButtonHidden(true)
+                .alert("Tem certeza que deseja sair?", isPresented: $showAlert) {
+                    
+                    Button("Cancelar", role: .cancel) {}
+                    Button("Sair", role: .destructive) {
+                        navigation.goHome()
+                    }
+                    
+                } message: {
+                    Text("As alterações feitas serão perdidas.")
                 }
             }
-            .navigationBarBackButtonHidden(true)
-            .alert("Tem certeza que deseja sair?", isPresented: $showAlert) {
-                
-                Button("Cancelar", role: .cancel) {}
-                Button("Sair", role: .destructive) {
-                    navigation.goHome()
-                }
-                      
-            } message: {
-            Text("As alterações feitas serão perdidas.")
-            }
         }
-        }
-    
-//    func goForward() {
-//        let questionJustFinished = photoSession.currentQuestion
-//        if photoSession.shouldTakePhoto(afterQuestion: questionJustFinished){
-//            photoSession.goToNextQuestion()
-//            navigation.navigate(to: .challenge)
-//            return
-//        }
-//        if questionJustFinished == photoSession.totalQuestions {
-//            navigation.navigate(to: .memory)
-//            return
-//        }
-//        
-//        photoSession.goToNextQuestion()
-//    }
+    }
 }
-
-
 
 //#Preview {
 //    QuestionView(photoSession: photoSession)

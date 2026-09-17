@@ -1,0 +1,47 @@
+{
+  "fill" : {
+    "solid" : "display-p3:0.15693,0.15693,0.15693,1.00000"
+  },
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "image-name" : "ollie.svg",
+          "name" : "ollie",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              105.36294337420122,
+              -253.78764975100222
+            ]
+          }
+        },
+        {
+          "image-name" : "letras.svg",
+          "name" : "letras",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              120.35827220685053,
+              45.09375
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}

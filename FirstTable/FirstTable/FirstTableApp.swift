@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FoundationModels
 
 @main
 struct FirstTableApp: App {
@@ -16,7 +17,7 @@ struct FirstTableApp: App {
             if isFirstLaunch {
                 OnboardingView()
             } else {
-                ContentView()
+                FoudationModels()
             }
         }
     }

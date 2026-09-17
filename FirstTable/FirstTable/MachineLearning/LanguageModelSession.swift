@@ -43,10 +43,31 @@ class FoundationModelsSession {
     func generateQuestions() async {
         do {
             let session = LanguageModelSession (
-                instructions: "Você é um gerador de perguntas para divertir e gerar assuntos entre grupos de amigos. Sua tarefa é criar várias perguntas incomuns, originais, engraçadas e instigantes para um grupo de amigos. Faça perguntas curtas, mas ao mesmo tempo profundas. Faça perguntas bem diferentes entre si. Você não pode sob hipótese nenhuma repetir perguntas. \(categoriesInstructions). Você deve gerar apenas um total de \(numberQuestions) perguntas. Suas perguntas devem ser preferencialmente voltadas a um grupo de amigos com a seguinte descrição: \(descriptionGroup). Você não pode sob hitótese nenhuma gerar afirmações, apenas perguntas. Cada pergunta deve: estimular o debate, a discordância, o raciocínio e a conversa entre os participantes; ser criativa e surpreendente, evitando clichês e cenários previsíveis, criando cenários relacionados às experiências, personalidades, interesses, piadas internas ou eventos memoráveis deles; permitir que diferentes pessoas tenham respostas plausíveis e opiniões divergentes; de preferência, envolver um dilema, uma consequência inesperada, uma situação irônica. Evite perguntas genéricas ou clichês, como “Que superpoder você escolheria?” ou “Que animal você seria?”. Evite perguntas sobre situações cotidianas comuns. Evite perguntas que possam ser respondidas simplesmente com “sim” ou “não”. Evite perguntas excessivamente óbvias. Evite repetir o mesmo cenário, estrutura, premissa ou tipo de dilema. Importante: “controversa” significa uma pergunta que pode levar a opiniões diferentes, desacordos, acusações, alianças ou discussões divertidas entre amigos, não necessariamente uma pergunta que seja ofensiva ou envolva temas delicados. Antes de criar as perguntas, avalie cada uma delas em silêncio. Se uma pergunta parecer genérica, previsível, repetitiva ou improvável de gerar discussão, descarte-a e crie uma melhor. Não revele essa avaliação. Responda apenas em português"
+                instructions:
+                """
+                Você cria perguntas para gerar conversas divertidas, debates e discordâncias entre amigos, para um aplicativo lúdico de quiz em grupo.
+                Crie perguntas curtas, originais, inesperadas e diferentes entre si.
+                Regras:
+                - Gere exatamente \(numberQuestions) perguntas.
+                - Siga obrigatoriamente estas categorias: \(categoriesInstructions)
+                - Não repita perguntas, cenários, estruturas ou tipos de dilema.
+                - Gere apenas perguntas, nunca afirmações.
+                - Evite perguntas de sim/não, clichês, situações cotidianas óbvias e perguntas genéricas.
+                - Prefira dilemas, consequências inesperadas, situações irônicas e escolhas em que diferentes pessoas possam defender respostas diferentes.
+                - As perguntas devem estimular discussão, acusações brincalhonas, alianças, discordâncias ou revelações interessantes entre amigos.
+                - Mantenha cada pergunta sucinta e direta, usando apenas o contexto necessário para preservar a criatividade e gerar debate. Evite explicações, detalhes ou construções longas que não aumentem o potencial de discussão.
+                - Seja criativo: transforme informações sobre o grupo em premissas e cenários inesperados, em vez de simplesmente perguntar sobre essas informações.
+                - Antes de gerar cada pergunta, descarte silenciosamente ideias genéricas, previsíveis ou parecidas com perguntas anteriores.
+                - Responda apenas em português.
+                """
             )
             let response = try await session.respond(
-                to: "Somos um grupo de amigos que gostam de se divertir e de coisas interessantes. Use the group information as inspiration, but do not necessarily mention the facts explicitly. Whenever possible, transform those facts into unexpected elements of the hypothetical scenarios rather than simply asking questions about them.",
+                to:
+                """
+                INFORMAÇÕES DESTE GRUPO: \(descriptionGroup)
+                CATEGORIAS / RESTRIÇÕES DESTA GERAÇÃO: \(categoriesInstructions)
+                Use as informações do grupo como principal fonte de inspiração. Não é necessário mencionar os fatos literalmente. Prefira incorporá-los indiretamente em dilemas, hipóteses, situações absurdas, consequências inesperadas ou conflitos entre os participantes. Prioridade: 1. Respeitar as categorias solicitadas. 2. Personalizar as perguntas para este grupo. 3. Maximizar criatividade, variedade e potencial de discussão. Gere \(numberQuestions) perguntas.
+                """,
                 generating: [Question].self,
             )
             

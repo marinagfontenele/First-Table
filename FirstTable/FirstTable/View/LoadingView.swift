@@ -9,15 +9,15 @@ import SwiftUI
 
 struct LoadingView: View {
     @EnvironmentObject var navigation: NavigationManager
-    @State var categories: [Category] = []
-    @State var description: String = ""
+//    @State var description: String = ""
     @State var modelService = FoundationModelsSession()
     @State private var currentQuestion: Int = 1
 
     
     var body: some View {
         if let totalQuestion = navigation.totalQuestion,
-           let photoSession = navigation.photoSession{
+           let categories: [Category] = navigation.categories,
+           let description: String = navigation.groupDescription{
             ZStack{
                 Color(.bgBlack).ignoresSafeArea()
                 VStack(alignment: .center){
@@ -43,7 +43,7 @@ struct LoadingView: View {
                 modelService.categories = categories
                 
                 await modelService.generateQuestions()
-                
+                print("\(totalQuestion); \(description); \(categories).")
                 navigation.modelService = modelService
                 navigation.navigate(to: .challenge)
             }
