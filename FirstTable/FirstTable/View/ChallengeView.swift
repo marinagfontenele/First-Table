@@ -45,6 +45,7 @@ struct ChallengeView: View {
                 ZStack{
                     Image("PurpleSpeech")
                         .padding(.bottom,50)
+                        .accessibilityHidden(true)
                     
                     if let task = photoSession.currentTask {
                         Text(task.instruction)
@@ -68,6 +69,7 @@ struct ChallengeView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                         .padding(.vertical, 25)
                 }
+                .accessibilityLabel("Acessar câmera")
             }
             .navigationTitle("Desafio")
             .padding(.horizontal, 40)

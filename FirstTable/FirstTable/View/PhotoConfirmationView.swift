@@ -28,6 +28,8 @@ struct PhotoConfirmationView: View {
                 .padding(.horizontal)
                 .padding(.bottom, 90)
                 .padding(.bottom)
+//                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("foto tirada")
                 
                 OllieView(yEyes: 0)
                     .scaleEffect(scale)
@@ -55,6 +57,8 @@ struct PhotoConfirmationView: View {
                     } label: {
                         Image(systemName: "checkmark")
                     }
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel("Salvar foto")
         }
             }
         }

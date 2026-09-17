@@ -28,6 +28,7 @@ struct ContentView: View {
                             
                             Image("kovensatioLogo")
                                 .offset(x: 5)
+                                .accessibilityHidden(true)
                             
                             Image("baloon")
                                 .resizable()
@@ -39,6 +40,8 @@ struct ContentView: View {
                                 .frame(width: 120, height: 100)
                                 .offset(x: 125, y: isFloating ? -120 : -110)
                         }
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel("konversátio")
                         .onAppear {
                             withAnimation(
                                 .easeInOut(duration: 2)
@@ -88,22 +91,28 @@ struct ContentView: View {
                                     .resizable()
                                     .frame(width: 190, height: 190)
                                     .offset(x: -135, y: -30)
+                                    .accessibilityHidden(true)
 
                                 
                                 Image("kovensatioLogo")
                                     .offset(x: 5)
+                                    .accessibilityHidden(true)
                                 
                                 Image("baloon")
                                     .resizable()
                                     .frame(width: 80, height: 80)
                                     .offset(x: 110, y: 50)
+                                    .accessibilityHidden(true)
                                 
                                 Image("wave")
                                     .resizable()
                                     .frame(width: 120, height: 100)
                                     .offset(x: 125, y: -115)
+                                    .accessibilityHidden(true)
                                 
                             }
+                            .accessibilityElement(children: .ignore)
+                            .accessibilityLabel("konversátio")
                             
                             Spacer(minLength: 75)
                             
