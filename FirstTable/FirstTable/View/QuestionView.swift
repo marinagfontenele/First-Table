@@ -135,7 +135,6 @@ struct QuestionView: View {
                             .padding(.horizontal, 40)
                             .padding(.vertical, 25)
                     }
-                    .accessibilitySortPriority(1)
                 }
             .background(Color.bgBlack.ignoresSafeArea())
             .navigationTitle("Perguntas")
