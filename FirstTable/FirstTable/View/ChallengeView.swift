@@ -64,7 +64,7 @@ struct ChallengeView: View {
                 } label: {
                     MainButtonView(title: "Fotografar")
                 }
-                .accessibilityLabel(Text("Ir para tela de câmera"))
+                .accessibilityLabel("Acessar câmera")
             }
             .navigationTitle("Desafio")
             .padding(.horizontal, 40)

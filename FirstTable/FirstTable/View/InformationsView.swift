@@ -19,102 +19,104 @@ struct InformationsView: View {
     
     @FocusState private var isNameFieldFocused: Bool
     
+    @AccessibilityFocusState private var initialFocus: Bool
+    
     var body: some View {
             ScrollView {
-                    HStack {
-                        VStack(alignment: .leading) {
-                          
-                            VStack{
-                                Text("Nome do Grupo")
-                                    .font(Font.custom("Poppins-SemiBold", size: 20))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 15)
-                                    .accessibilityHidden(true)
-                                
-                                TextField("Ex: Os Besties", text: $groupName)
-                                    .accessibilityElement(children: .ignore)
-                                    .accessibilityLabel("Digite o nome do grupo")
-                                    .font(Font.custom("Poppins-SemiBold", size: 15))
-                                    .foregroundStyle(.white)
-                                    .padding(15)
-                                    .overlay {
-                                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                            .stroke(showError && groupName.trimmingCharacters(in:
-                                                    .whitespacesAndNewlines).isEmpty ? .red : Color.lemonGreen, lineWidth: 2)
-                                    }
-                                    .background(
-                                        Color(.lemonBackground)
-                                    )
-                                    .focused($isNameFieldFocused)
-                                    .padding(.horizontal, 20)
-                                
-                                if showError && groupName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                                    Text("Digite um nome para o grupo")
-                                        .font(.custom("Poppins-SemiBold", size: 13))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .foregroundStyle(.red)
-                                        .padding(.horizontal, 20)
-                                        .accessibilityLabel(Text("Digite um nome do grupo para continuar"))
-                                }
-                            }
-                            .padding(.bottom, 20)
+                VStack(alignment: .leading) {
+                    
+                    VStack{
+                        Text("Nome do Grupo")
+                            .font(Font.custom("Poppins-SemiBold", size: 20))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 15)
+                            .accessibilityHidden(true)
                         
-                        HStack{
-                            Text("Número de Perguntas")
-                                .font(Font.custom("Poppins-SemiBold", size: 20))
+                        TextField("Ex: Os Besties", text: $groupName)
+                            .accessibilityElement(children: .ignore)
+                            .accessibilityLabel("Digite o nome do grupo")
+                            .accessibilityHint("clique duas vezes para digitar")
+                            .accessibilityFocused($initialFocus)
+                            .font(Font.custom("Poppins-SemiBold", size: 15))
+                            .foregroundStyle(.white)
+                            .padding(15)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                    .stroke(showError && groupName.trimmingCharacters(in:
+                                            .whitespacesAndNewlines).isEmpty ? .red : Color.lemonGreen, lineWidth: 2)
+                            }
+                            .background(
+                                Color(.lemonBackground)
+                            )
+                            .focused($isNameFieldFocused)
+                            .padding(.horizontal, 20)
+                        
+                        if showError && groupName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                            Text("Digite um nome para o grupo")
+                                .font(.custom("Poppins-SemiBold", size: 13))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundStyle(.red)
                                 .padding(.horizontal, 20)
-                                .accessibilityLabel("Escolha um número de perguntas")
+                                .accessibilityLabel(Text("Digite um nome do grupo para continuar"))
                         }
-                            VStack  {
-                                HStack {
-                                    
-                                    fiveButton
-                                    
-                                    Spacer(minLength: 2)
-                                    
-                                    tenButton
-                                    
-                                    Spacer(minLength: 2)
-                                    
-                                    fifteenButton
-                                }
-                                .padding(.bottom, 5)
-                                
-                                if showError && selectedRound == nil {
-                                    
-                                    Text("Selecione o número de rodadas.")
-                                        .font(.custom("Poppins-SemiBold", size: 13))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .foregroundStyle(.red)
-                                        .padding(.horizontal, 20)
-                                        .accessibilityLabel(Text("Selecione uma qunatidade de perguntas para continuar"))
-                                }
-                            }
-                        
+                    }
+                    .padding(.bottom, 20)
+                
+                HStack{
+                    Text("Número de Perguntas")
+                        .font(Font.custom("Poppins-SemiBold", size: 20))
+                        .padding(.horizontal, 20)
+                        .accessibilityLabel("Escolha um número de perguntas")
+                }
+                    VStack  {
+                        HStack {
+                            
+                            fiveButton
+                            
+                            Spacer(minLength: 2)
+                            
+                            tenButton
+                            
+                            Spacer(minLength: 2)
+                            
+                            fifteenButton
+                        }
                         .padding(.bottom, 5)
                         
-                       
-                        
-                        Button {
-                            validateAndContinue()
-                            } label: {
-                                
-                                MainButtonView(title: "Continuar")
+                        if showError && selectedRound == nil {
+                            
+                            Text("Selecione o número de rodadas.")
+                                .font(.custom("Poppins-SemiBold", size: 13))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundStyle(.red)
+                                .padding(.horizontal, 20)
+                                .accessibilityLabel(Text("Selecione uma qunatidade de perguntas para continuar"))
                         }
-                        .padding(.horizontal, 40)
-                        .padding(.vertical, 25)
-                     
-                        
-                        Spacer()
-                        
-                        OllieView(yEyes: 0.02)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .offset(y:100)
-                            .scaleEffect(2)
-                            .accessibilityHidden(true)
                     }
+                
+                .padding(.bottom, 5)
+                
+               
+                
+                Button {
+                    validateAndContinue()
+                    } label: {
+                        
+                        MainButtonView(title: "Continuar")
                 }
+                .padding(.horizontal, 40)
+                .padding(.vertical, 25)
+             
+                
+                Spacer()
+                
+                OllieView(yEyes: 0.02)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .offset(y:100)
+                    .scaleEffect(2)
+                    .accessibilityHidden(true)
+            }
             }
             .background(Color.bgBlack.ignoresSafeArea())
 
@@ -123,6 +125,11 @@ struct InformationsView: View {
             }
         
         .navigationTitle("Informações")
+        .onAppear() {
+            DispatchQueue.main.async{
+                initialFocus = true
+            }
+        }
     }
     
     private func validateAndContinue() {
