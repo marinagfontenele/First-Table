@@ -24,22 +24,32 @@ struct OnboardingView: View {
                             ViewThatFits(in: .vertical) {
                                 VStack {
                                     Image(option.imageName)
+                                        .accessibilityHidden(true)
                                     
                                     Spacer()
                                     
                                     Text(option.title)
                                         .font(Font.custom("Poppins-SemiBold", size: 32))
                                         .padding(.bottom, 8)
+                                        .padding(.horizontal, 20)
                                         .multilineTextAlignment(.center)
+                                        .lineHeight(.normal)
+                                        .accessibilitySortPriority(3)
+                                        
+
                                     
                                     Text(option.subtitle)
                                         .font(Font.custom("Poppins-Regular", size: 20))
                                         .padding(.bottom, 50)
+                                        .padding(.horizontal, 30)
                                         .multilineTextAlignment(.center)
+                                        .accessibilitySortPriority(2)
+
                                 }
                                 
                                 ScrollView (showsIndicators: false){
                                     Image(option.imageName)
+                                        .accessibilityHidden(true)
                                     
                                     Spacer()
                                     
@@ -47,11 +57,15 @@ struct OnboardingView: View {
                                         .font(Font.custom("Poppins-SemiBold", size: 32))
                                         .padding(.bottom, 8)
                                         .multilineTextAlignment(.center)
+                                        .accessibilitySortPriority(1)
+
                                     
                                     Text(option.subtitle)
                                         .font(Font.custom("Poppins-Regular", size: 20))
                                         .padding(.bottom, 50)
                                         .multilineTextAlignment(.center)
+                                        .accessibilitySortPriority(2)
+
                                 }
                             }
 
@@ -95,6 +109,8 @@ struct OnboardingView: View {
                 }
                 .padding(.horizontal, 40)
                 .padding(.vertical, 8)
+                .accessibilitySortPriority(3)
+
                 
                 Spacer()
             } else {
@@ -106,6 +122,8 @@ struct OnboardingView: View {
                 }
                 .padding(.horizontal, 40)
                 .padding(.vertical, 8)
+                .accessibilitySortPriority(1)
+
                 
                 Spacer()
             }

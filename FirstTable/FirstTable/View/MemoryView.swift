@@ -20,6 +20,8 @@ struct MemoryView: View {
                     FivePictureTemplate(photoSession: photoSession)
                 }
             }
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel(Text("Colagem de fotos com as fotografias tiradas durante a partida"))
             .background(Color.bgBlack.ignoresSafeArea())
             .navigationTitle("Memória")
             .navigationBarTitleDisplayMode(.inline)
@@ -30,7 +32,7 @@ struct MemoryView: View {
                     } label: {
                         Image(systemName: "xmark")
                     }
-
+                    .accessibilityLabel(Text("Voltar para a tela inicial"))
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -49,7 +51,6 @@ struct MemoryView: View {
                     } label: {
                         Image(systemName: "square.and.arrow.up")
                     }
-
                 }
             }
             .navigationBarBackButtonHidden(true)

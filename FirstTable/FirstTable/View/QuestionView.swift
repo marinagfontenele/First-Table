@@ -101,6 +101,7 @@ struct QuestionView: View {
                         .overlay(alignment: .bottomTrailing){
                             Image("shoutingBalloon")
                                 .offset(y: 30)
+                                .accessibilityHidden(true)
                         }
                     }
                     .padding(.bottom, 70)
@@ -134,6 +135,7 @@ struct QuestionView: View {
                             .padding(.horizontal, 40)
                             .padding(.vertical, 25)
                     }
+                    .accessibilitySortPriority(1)
                 }
             .background(Color.bgBlack.ignoresSafeArea())
             .navigationTitle("Perguntas")
@@ -145,7 +147,7 @@ struct QuestionView: View {
                     } label: {
                         Image(systemName: "xmark")
                     }
-
+                    .accessibilityLabel(Text("Voltar para a tela inicial"))
                 }
             }
             .navigationBarBackButtonHidden(true)

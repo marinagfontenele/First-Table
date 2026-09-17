@@ -20,6 +20,8 @@ struct PhotoConfirmationView: View {
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFill()
+                        .accessibilityAddTraits(.isHeader)
+                        .accessibilityLabel(Text("Foto tirada"))
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .aspectRatio(3.0 / 4.0, contentMode: .fit)
