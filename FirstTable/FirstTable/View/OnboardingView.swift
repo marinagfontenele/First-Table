@@ -31,13 +31,17 @@ struct OnboardingView: View {
                                     Text(option.title)
                                         .font(Font.custom("Poppins-SemiBold", size: 32))
                                         .padding(.bottom, 8)
+                                        .padding(.horizontal, 20)
                                         .multilineTextAlignment(.center)
+                                        .lineHeight(.normal)
                                         .accessibilitySortPriority(3)
+                                        
 
                                     
                                     Text(option.subtitle)
                                         .font(Font.custom("Poppins-Regular", size: 20))
                                         .padding(.bottom, 50)
+                                        .padding(.horizontal, 30)
                                         .multilineTextAlignment(.center)
                                         .accessibilitySortPriority(2)
 
