@@ -22,6 +22,7 @@ struct TutorialView: View {
                         ViewThatFits(in: .vertical) {
                             VStack {
                                 Image(option.imageName)
+                                    .accessibilityHidden(true)
                                 
                                 Spacer()
                                 
@@ -35,9 +36,11 @@ struct TutorialView: View {
                                     .padding(.bottom, 50)
                                     .multilineTextAlignment(.center)
                             }
+                            .accessibilitySortPriority(2)
                             
                             ScrollView (showsIndicators: false){
                                 Image(option.imageName)
+                                    .accessibilityHidden(true)
                                 
                                 Spacer()
                                 
@@ -50,7 +53,9 @@ struct TutorialView: View {
                                     .font(Font.custom("Poppins-Regular", size: 20))
                                     .padding(.bottom, 50)
                                     .multilineTextAlignment(.center)
+                                    .accessibilitySortPriority(2)
                             }
+                            .accessibilitySortPriority(2)
                         }
 
                     }
@@ -78,6 +83,7 @@ struct TutorialView: View {
             }
             .padding(.horizontal, 40)
             .padding(.vertical, 8)
+            .accessibilitySortPriority(1)
             
             Spacer()
         } else {
@@ -88,6 +94,7 @@ struct TutorialView: View {
             }
             .padding(.horizontal, 40)
             .padding(.vertical, 8)
+            .accessibilitySortPriority(1)
             
             Spacer()
         }
