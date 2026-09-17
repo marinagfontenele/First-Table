@@ -14,6 +14,11 @@ struct OnboardingView: View {
     @State private var currentOption: Onboarding = .introduction
     @State private var selectedIndex: Int = 0
     private let allPages = Onboarding.allCases
+    @AccessibilityFocusState private var restartFocus: FocusField?
+
+    enum FocusField: Hashable {
+        case beginning
+    }
     
     var body: some View {
         NavigationStack {
@@ -34,7 +39,7 @@ struct OnboardingView: View {
                                         .padding(.horizontal, 20)
                                         .multilineTextAlignment(.center)
                                         .lineHeight(.normal)
-                                        .accessibilitySortPriority(3)
+                                        .accessibilityFocused($restartFocus, equals: .beginning)
                                         
 
                                     
@@ -43,7 +48,6 @@ struct OnboardingView: View {
                                         .padding(.bottom, 50)
                                         .padding(.horizontal, 30)
                                         .multilineTextAlignment(.center)
-                                        .accessibilitySortPriority(2)
 
                                 }
                                 
@@ -57,14 +61,12 @@ struct OnboardingView: View {
                                         .font(Font.custom("Poppins-SemiBold", size: 32))
                                         .padding(.bottom, 8)
                                         .multilineTextAlignment(.center)
-                                        .accessibilitySortPriority(1)
 
                                     
                                     Text(option.subtitle)
                                         .font(Font.custom("Poppins-Regular", size: 20))
                                         .padding(.bottom, 50)
                                         .multilineTextAlignment(.center)
-                                        .accessibilitySortPriority(2)
 
                                 }
                             }
@@ -92,6 +94,7 @@ struct OnboardingView: View {
                     if currentOption != .introduction {
                         Button {
                             returnPage()
+                            DispatchQueue.main.async{restartFocus = .beginning }
                         } label: {
                             Image(systemName: "chevron.backward")
                                 .fontWeight(.semibold)
@@ -104,12 +107,12 @@ struct OnboardingView: View {
             if currentOption != .memory {
                 Button {
                     advancePage()
+                    DispatchQueue.main.async{restartFocus = .beginning }
                 } label: {
                     MainButtonView(title: "Continuar")
                 }
                 .padding(.horizontal, 40)
                 .padding(.vertical, 8)
-                .accessibilitySortPriority(3)
 
                 
                 Spacer()
@@ -117,12 +120,12 @@ struct OnboardingView: View {
                 Button {
                     isFirstLaunch = false
                     goToNext = true
+                    DispatchQueue.main.async{restartFocus = .beginning }
                 } label: {
                     MainButtonView(title: "Concluir")
                 }
                 .padding(.horizontal, 40)
                 .padding(.vertical, 8)
-                .accessibilitySortPriority(1)
 
                 
                 Spacer()

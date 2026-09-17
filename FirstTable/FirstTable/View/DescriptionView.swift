@@ -45,6 +45,7 @@ struct DescriptionView: View {
                                         RoundedRectangle(cornerRadius: 15)
                                             .stroke( showError ? .red : Color.lemonGreen, lineWidth: 2 )
                                     }
+                                    .accessibilitySortPriority(1)
                                     .accessibilityLabel(Text("Descreva seu grupo"))
                                     .accessibilityHint(Text("As características vão influenciar algumas perguntas, então descrevam bem suas preferências"))
                                 
