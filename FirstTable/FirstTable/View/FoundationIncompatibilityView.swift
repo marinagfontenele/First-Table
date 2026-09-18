@@ -15,6 +15,7 @@ struct FoundationIncompatibilityView: View {
                 
                 Image("errorImage")
                     .scaledToFit()
+                    .accessibilityHidden(true)
                 
                 Text("Ops, recurso indisponível!")
                     .font(.custom("Poppins-Bold", size: 24))
@@ -24,12 +25,14 @@ struct FoundationIncompatibilityView: View {
                     .font(.custom("Poppins-Medium", size: 16))
                     .padding(.bottom)
                     .padding(.horizontal)
+                    .accessibilityLabel("Seu aparelho não é compatível com a Apple Intelligence: não é possível continuar.")
                 
                 Spacer()
                 
                 Image("cryingOllie")
                     .padding(.bottom, -270)
                     .scaledToFit()
+                    .accessibilityHidden(true)
             }
             .padding(.horizontal, 27)
             .background(Color.bgBlack.ignoresSafeArea(edges: .all))
@@ -41,6 +44,7 @@ struct FoundationIncompatibilityView: View {
                     
                     Image("errorImage")
                         .scaledToFit()
+                        .accessibilityHidden(true)
                     
                     Text("Ops, recurso indisponível!")
                         .font(.custom("Poppins-Bold", size: 24))
@@ -50,12 +54,14 @@ struct FoundationIncompatibilityView: View {
                         .font(.custom("Poppins-Medium", size: 16))
                         .padding(.bottom)
                         .padding(.horizontal)
+                        .accessibilityLabel("Seu aparelho não é compatível com a Apple Intelligence: não é possível continuar.")
                     
                     Spacer(minLength: 30)
                     
                     Image("cryingOllie")
                         .padding(.bottom, -270)
                         .scaledToFit()
+                        .accessibilityHidden(true)
                 }
                 .frame(minWidth: 400, maxWidth: 700)
                 .multilineTextAlignment(.center)
