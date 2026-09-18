@@ -18,7 +18,6 @@ struct PolaroidFrameTextAtBottom: View {
                 .fill(Color(red: 0.94, green: 0.94, blue: 0.96))
                 .frame(width: 133, height: 200)
                 
-            
             VStack{
                 Image(uiImage: photo.image)
                     .resizable()
@@ -29,7 +28,6 @@ struct PolaroidFrameTextAtBottom: View {
                 Text(photo.task.name)
                     .font(.custom("Poppins-Bold", size: 8))
                     .foregroundStyle(Color.black)
-                    
             }
         }
     }
