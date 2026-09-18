@@ -48,6 +48,7 @@ struct FoundationDisabledView: View {
                     .padding(.horizontal)
                 
                 Spacer()
+
                 
                 Image("sadOllie")
                     .padding(.bottom, -270)
@@ -57,6 +58,7 @@ struct FoundationDisabledView: View {
             .padding(.horizontal, 27)
             .background(Color.bgBlack.ignoresSafeArea(edges: .all))
             .multilineTextAlignment(.center)
+            .navigationBarBackButtonHidden(true)
             
             ScrollView (showsIndicators: false){
                 VStack {
@@ -109,6 +111,7 @@ struct FoundationDisabledView: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
                 .padding(.horizontal, 30)
+                .navigationBarBackButtonHidden(true)
             }
             .padding(.horizontal)
         }

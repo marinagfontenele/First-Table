@@ -170,8 +170,6 @@ struct QuestionView: View {
     }
 }
 
-
-
 //#Preview {
 //    QuestionView(photoSession: photoSession)
 //}
