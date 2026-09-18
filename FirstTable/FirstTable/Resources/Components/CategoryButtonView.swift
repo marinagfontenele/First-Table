@@ -32,15 +32,17 @@ struct CategoryButtonView: View {
                         }
                         .padding(.top, 14)
                         .padding(.bottom, -7)
+                        .accessibilityHidden(true)
                         
                         Text("\(category.name)")
                             .font(Font.custom("Poppins-SemiBold", size: 13))
                             .foregroundStyle(.black)
-                            .padding(.horizontal, 15)
+                            .padding(.horizontal, 10)
                             .padding(.bottom, 10)
                             .padding(.top, 5)
                     }
                 }
+                .accessibilityLabel(Text("Selecionado"))
                 .frame(maxWidth: 130, minHeight: 109)
                 .overlay {
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
@@ -66,11 +68,12 @@ struct CategoryButtonView: View {
                         }
                         .padding(.top, 14)
                         .padding(.bottom, -7)
+                        .accessibilityHidden(true)
                         
                         Text("\(category.name)")
                             .font(Font.custom("Poppins-SemiBold", size: 13))
                             .foregroundStyle(.white)
-                            .padding(.horizontal, 12)
+                            .padding(.horizontal, 10)
                             .padding(.bottom, 10)
                             .padding(.top, 5)
                     }

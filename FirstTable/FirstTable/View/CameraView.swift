@@ -47,6 +47,7 @@ struct CameraView: View {
                 }
                 .padding(.top)
             }
+            .accessibilityHint("Aperte duas vezes para tirar foto")
             
             Spacer()
             
@@ -59,6 +60,7 @@ struct CameraView: View {
                     .frame(width: 50, height: 50)
                     .background(Circle().fill(.gray.opacity(0.5)))
             }
+            .accessibilityLabel("virar câmera")
         }
         .padding()
         

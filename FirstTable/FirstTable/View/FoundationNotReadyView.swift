@@ -15,6 +15,7 @@ struct FoundationNotReadyView: View {
                 
                 Image("errorImage")
                     .scaledToFit()
+                    .accessibilityHidden(true)
                 
                 Text("A integração com a Apple Intelligence ainda está em andamento!")
                     .font(.custom("Poppins-Bold", size: 24))
@@ -30,6 +31,7 @@ struct FoundationNotReadyView: View {
                 Image("sadOllie")
                     .padding(.bottom, -270)
                     .scaledToFit()
+                    .accessibilityHidden(true)
             }
             .padding(.horizontal, 27)
             .background(Color.bgBlack.ignoresSafeArea(edges: .all))
@@ -41,6 +43,7 @@ struct FoundationNotReadyView: View {
                     
                     Image("errorImage")
                         .scaledToFit()
+                        .accessibilityHidden(true)
                     
                     Text("A integração com a Apple Intelligence ainda está em andamento!")
                         .font(.custom("Poppins-Bold", size: 24))
@@ -56,6 +59,7 @@ struct FoundationNotReadyView: View {
                     Image("sadOllie")
                         .padding(.bottom, -270)
                         .scaledToFit()
+                        .accessibilityHidden(true)
                 }
                 .frame(minWidth: 400, maxWidth: 700)
                 .multilineTextAlignment(.center)

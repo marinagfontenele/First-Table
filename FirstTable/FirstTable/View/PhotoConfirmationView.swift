@@ -20,6 +20,8 @@ struct PhotoConfirmationView: View {
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFill()
+                        .accessibilityAddTraits(.isHeader)
+                        .accessibilityLabel(Text("Foto tirada"))
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .aspectRatio(3.0 / 4.0, contentMode: .fit)
@@ -28,6 +30,8 @@ struct PhotoConfirmationView: View {
                 .padding(.horizontal)
                 .padding(.bottom, 90)
                 .padding(.bottom)
+//                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("foto tirada")
                 
                 OllieView(yEyes: 0)
                     .scaleEffect(scale)
@@ -55,6 +59,8 @@ struct PhotoConfirmationView: View {
                     } label: {
                         Image(systemName: "checkmark")
                     }
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel("Salvar foto")
         }
             }
         }

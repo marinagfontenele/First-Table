@@ -16,6 +16,8 @@ struct DescriptionView: View {
     @FocusState private var isDescriptionFocused: Bool
     @State var photoSession: PhotoSession = PhotoSession()
     
+    @AccessibilityFocusState private var initialFocus: Bool
+    
     var body: some View {
             ScrollView {
                 if let totalQuestion = navigation.totalQuestion{
@@ -32,6 +34,7 @@ struct DescriptionView: View {
                          
                                 TextEditor(text: $description)
                                     .focused($isDescriptionFocused)
+                                    .accessibilityFocused($initialFocus)
                                     .frame(minHeight: 150)
                                     .padding()
                                     .scrollContentBackground(.hidden)
@@ -42,6 +45,7 @@ struct DescriptionView: View {
                                         RoundedRectangle(cornerRadius: 15)
                                             .stroke( showError ? .red : Color.lemonGreen, lineWidth: 2 )
                                     }
+                                    .accessibilitySortPriority(1)
                                     .accessibilityLabel(Text("Descreva seu grupo"))
                                     .accessibilityHint(Text("As características vão influenciar algumas perguntas, então descrevam bem suas preferências"))
                                 
@@ -100,6 +104,11 @@ struct DescriptionView: View {
             }
         .navigationTitle("Informações")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear() {
+            DispatchQueue.main.async{
+                initialFocus = true
+            }
+        }
     }
     
     private func validateAndContinue() {

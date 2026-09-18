@@ -12,6 +12,11 @@ struct QuestionView: View {
     @State private var showAlert: Bool = false
     @State private var currentQuestion: Int = 1
     @State private var question: String = "Se voce dormisse e acordasse com o dobro da sua idade, o que iria fazer?"
+    @AccessibilityFocusState private var restartFocus: FocusField?
+    
+    enum FocusField: Hashable {
+        case beginning
+    }
     
     var body: some View {
         if let photoSession = navigation.photoSession,
@@ -38,6 +43,8 @@ struct QuestionView: View {
                         Spacer()
                         
                         Text("\(photoSession.currentQuestion)/\(photoSession.totalQuestions)")
+                            .accessibilityLabel("pergunta \(photoSession.currentQuestion) de \(photoSession.totalQuestions)")
+                            .accessibilityFocused($restartFocus, equals: .beginning)
                     }
                     .padding()
                     .padding(.horizontal,10)
@@ -65,6 +72,7 @@ struct QuestionView: View {
                             .overlay(alignment: .bottomTrailing){
                                 Image("shoutingBalloon")
                                     .offset(y: 30)
+                                    .accessibilityHidden(true)
                             }
                             .padding(.bottom, 70)
                         
@@ -90,7 +98,7 @@ struct QuestionView: View {
                             }
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 20)
-                            .padding(.top,60)
+                            .padding(.top, 60)
                             .font(.custom("Poppins-SemiBold", size: 23))
                             .padding(.vertical)
                             .frame(minWidth:296, minHeight: 223 + 50)
@@ -98,6 +106,7 @@ struct QuestionView: View {
                             .overlay(alignment: .bottomTrailing){
                                 Image("shoutingBalloon")
                                     .offset(y: 30)
+                                    .accessibilityHidden(true)
                             }
                         }
                         .padding(.bottom, 70)
@@ -119,6 +128,8 @@ struct QuestionView: View {
                         }
                         
                         photoSession.goToNextQuestion()
+                        
+                        DispatchQueue.main.async{restartFocus = .beginning }
                     } label: {
                         Text("Continuar")
                             .font(.custom("Poppins-SemiBold", size: 24))
@@ -140,6 +151,7 @@ struct QuestionView: View {
                         } label: {
                             Image(systemName: "xmark")
                         }
+                        .accessibilityLabel(Text("Voltar para a tela inicial"))
                     }
                 }
                 .navigationBarBackButtonHidden(true)

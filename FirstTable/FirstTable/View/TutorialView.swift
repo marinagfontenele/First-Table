@@ -13,6 +13,11 @@ struct TutorialView: View {
     @State private var currentOption: Onboarding = .introduction
     @State private var selectedIndex: Int = 0
     private let allPages = Onboarding.allCases
+    @AccessibilityFocusState private var restartFocus: FocusField?
+
+    enum FocusField: Hashable {
+        case beginning
+    }
     
     var body: some View {
         VStack{
@@ -22,6 +27,7 @@ struct TutorialView: View {
                         ViewThatFits(in: .vertical) {
                             VStack {
                                 Image(option.imageName)
+                                    .accessibilityHidden(true)
                                 
                                 Spacer()
                                 
@@ -29,6 +35,7 @@ struct TutorialView: View {
                                     .font(Font.custom("Poppins-SemiBold", size: 32))
                                     .padding(.bottom, 8)
                                     .multilineTextAlignment(.center)
+                                    .accessibilityFocused($restartFocus, equals: .beginning)
                                 
                                 Text(option.subtitle)
                                     .font(Font.custom("Poppins-Regular", size: 20))
@@ -38,6 +45,7 @@ struct TutorialView: View {
                             
                             ScrollView (showsIndicators: false){
                                 Image(option.imageName)
+                                    .accessibilityHidden(true)
                                 
                                 Spacer()
                                 
@@ -73,6 +81,7 @@ struct TutorialView: View {
         if currentOption != .memory {
             Button {
                 advancePage()
+                DispatchQueue.main.async{restartFocus = .beginning }
             } label: {
                 MainButtonView(title: "Continuar")
             }

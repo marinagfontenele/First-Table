@@ -14,6 +14,7 @@ struct FoundationDisabledView: View {
                 Spacer()
                 
                 Image("errorImage")
+                    .accessibilityHidden(true)
                 
                 Text("Ative a Apple Intelligence!")                        .font(.custom("Poppins-Bold", size: 24))
                     .padding()
@@ -26,6 +27,7 @@ struct FoundationDisabledView: View {
                     .font(.custom("Poppins-Medium", size: 16))
                     .padding(.bottom)
                     .padding(.horizontal, 11)
+                    .accessibilityLabel("Vá em Ajustes, depois em Apple Intelligence e Siri.")
                 
                 Text("2. Ative a Apple Intelligence:")
                     .font(.custom("Poppins-Bold", size: 16))
@@ -50,6 +52,8 @@ struct FoundationDisabledView: View {
                 
                 Image("sadOllie")
                     .padding(.bottom, -270)
+                    .accessibilityHidden(true)
+                    
             }
             .padding(.horizontal, 27)
             .background(Color.bgBlack.ignoresSafeArea(edges: .all))
@@ -62,6 +66,7 @@ struct FoundationDisabledView: View {
                     
                     Image("errorImage")
                         .scaledToFit()
+                        .accessibilityHidden(true)
                     
                     Text("Ative a Apple Intelligence!")
                         .font(.custom("Poppins-Bold", size: 24))
@@ -75,6 +80,7 @@ struct FoundationDisabledView: View {
                         .font(.custom("Poppins-Medium", size: 16))
                         .padding(.bottom)
                         .padding(.horizontal)
+                        .accessibilityLabel("Vá em Ajustes, depois em Apple Intelligence e Siri.")
                     
                     Text("2. Ative a Apple Intelligence:")
                         .font(.custom("Poppins-Bold", size: 16))
@@ -99,6 +105,7 @@ struct FoundationDisabledView: View {
                     Image("sadOllie")
                         .padding(.bottom, -270)
                         .scaledToFit()
+                        .accessibilityHidden(true)
                 }
                 .frame(minWidth: 400, maxWidth: 700)
                 .multilineTextAlignment(.center)

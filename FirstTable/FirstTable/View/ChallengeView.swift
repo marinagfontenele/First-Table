@@ -29,6 +29,7 @@ struct ChallengeView: View {
                     .font(.custom("Poppins-SemiBold", size: 24))
                     .foregroundStyle(.lemonGreen)
                     .padding(.vertical, 16)
+                    .padding(.horizontal, 10)
                     .frame(maxWidth: .infinity, minHeight: 56)
                     .background(.bgBlack)
                     .cornerRadius(16)
@@ -45,6 +46,7 @@ struct ChallengeView: View {
                 ZStack{
                     Image("PurpleSpeech")
                         .padding(.bottom,50)
+                        .accessibilityHidden(true)
                     
                     if let task = photoSession.currentTask {
                         Text(task.instruction)
@@ -60,14 +62,9 @@ struct ChallengeView: View {
                 Button {
                     navigation.navigate(to: .camera)
                 } label: {
-                    Text("Fotografar")
-                        .font(.custom("Poppins-SemiBold", size: 24))
-                        .foregroundStyle(.darkGreen)
-                        .frame(maxWidth: .infinity, minHeight: 56)
-                        .background(.lemonGreen)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                        .padding(.vertical, 25)
+                    MainButtonView(title: "Fotografar")
                 }
+                .accessibilityLabel("Acessar câmera")
             }
             .navigationTitle("Desafio")
             .padding(.horizontal, 40)
@@ -80,7 +77,7 @@ struct ChallengeView: View {
                     } label: {
                         Image(systemName: "xmark")
                     }
-
+                    .accessibilityLabel(Text("Voltar para a tela inicial"))
                 }
             }
             .alert("Tem certeza que deseja sair?", isPresented: $showAlert) {
