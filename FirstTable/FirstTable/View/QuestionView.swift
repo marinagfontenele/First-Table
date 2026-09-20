@@ -24,7 +24,7 @@ struct QuestionView: View {
             if modelService.questions.isEmpty {
                 FoundationQuestionErrorView()
             } else {
-                ViewThatFits {
+                ViewThatFits (in: .vertical) {
                     VStack {
                         HStack {
                             ZStack(alignment: .leading){
