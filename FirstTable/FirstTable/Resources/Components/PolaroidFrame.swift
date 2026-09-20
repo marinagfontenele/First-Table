@@ -72,10 +72,19 @@ struct PolaroidFrameGroup: View {
                 .frame(width: 133, height: 210)
             
             VStack(spacing: 5){
-                Text(photo.task.name)
-                    .font(.custom("Poppins-Bold", size: 17))
-                    .foregroundStyle(Color.black)
-                    .padding(.bottom, 5)
+                ZStack{
+                    if photo.task.name.count <= 8 {
+                        Text(photo.task.name)
+                            .font(.custom("Poppins-Bold", size: 15))
+                            .foregroundStyle(Color.black)
+                            .padding(.bottom, 8)
+                    } else {
+                        Text(photo.task.name)
+                            .font(.custom("Poppins-Bold", size: 10))
+                            .foregroundStyle(Color.black)
+                            .padding(.bottom, 12)
+                    }
+                }
                 Image(uiImage: photo.image)
                     .resizable()
                     .scaledToFill()
